@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INNOCENT TRADERS | Premium NAVIGATOR Forex Automation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --lime-green: #32CD32;
+            --dark-green: #1a8a1a;
+            --black: #0a0a0a;
+            --white: #ffffff;
+            --gray: #1a1a1a;
+            --light-gray: #f5f5f5;
+            --gold: #FFD700;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: var(--black);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Premium Header Styles */
+        header {
+            background-color: rgba(10, 10, 10, 0.95);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(50, 205, 50, 0.3);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+        }
+
+        header.scrolled {
+            padding: 15px 0;
+            background-color: rgba(10, 10, 10, 0.98);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-text {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--lime-green);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(50, 205, 50, 0.3);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 40px;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 16px;
+            letter-spacing: 1px;
+        }
+
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--lime-green);
+            transition: width 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--lime-green);
+        }
+
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--lime-green);
+        }
+
+        /* Premium Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(10, 10, 10, 0.85), rgba(10, 10, 10, 0.9)), url('https://files.imagetourl.net/uploads/1760313720621-53daf037-cb05-4fa2-9cf3-9ae4c848a4cf.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            padding-top: 80px;
+            position: relative;
+        }
+
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(50, 205, 50, 0.1) 0%, rgba(10, 10, 10, 0.9) 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 25px;
+            color: var(--white);
+            text-transform: uppercase;
+            font-weight: 800;
+            letter-spacing: 2px;
+            line-height: 1.1;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero h1 span {
+            color: var(--lime-green);
+            position: relative;
+        }
+
+        .hero h1 span:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 5px;
+            bottom: 5px;
+            left: 0;
+            background-color: var(--lime-green);
+            opacity: 0.3;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 40px;
+            color: var(--white);
+            font-weight: 300;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--lime-green), var(--dark-green));
+            color: var(--black);
+            padding: 16px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: all 0.4s ease;
+            border: none;
+            box-shadow: 0 5px 15px rgba(50, 205, 50, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(50, 205, 50, 0.5);
+        }
+
+        .btn:hover:before {
+            left: 100%;
+        }
+
+        /* Premium About Section */
+        .about {
+            padding: 120px 0;
+            background-color: var(--black);
+            position: relative;
+        }
+
+        .about:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 50%, rgba(50, 205, 50, 0.05) 0%, transparent 50%);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 70px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 3rem;
+            color: var(--white);
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: var(--lime-green);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title p {
+            color: var(--white);
+            max-width: 700px;
+            margin: 30px auto 0;
+            font-size: 1.2rem;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 70px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h3 {
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            color: var(--white);
+            font-weight: 700;
+        }
+
+        .about-text p {
+            margin-bottom: 25px;
+            color: var(--white);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        .about-image {
+            flex: 1;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            position: relative;
+        }
+
+        .logo-placeholder {
+            background: linear-gradient(135deg, var(--gray), var(--black));
+            height: 450px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--lime-green);
+            font-size: 28px;
+            font-weight: bold;
+            border: 1px solid rgba(50, 205, 50, 0.2);
+        }
+
+        .logo-placeholder i {
+            font-size: 80px;
+            margin-bottom: 30px;
+            text-shadow: 0 0 20px rgba(50, 205, 50, 0.5);
+        }
+
+        /* Premium Product Section */
+        .product {
+            padding: 100px 0;
+            background: linear-gradient(rgba(10, 10, 10, 0.9), rgba(10, 10, 10, 0.9)), url('https://files.imagetourl.net/uploads/1760313720621-53daf037-cb05-4fa2-9cf3-9ae4c848a4cf.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            position: relative;
+        }
+
+        .product:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 70% 30%, rgba(50, 205, 50, 0.1) 0%, transparent 50%);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .product-card {
+            background: linear-gradient(145deg, rgba(40, 40, 40, 0.8), rgba(20, 20, 20, 0.9));
+            border-radius: 15px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(50, 205, 50, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--lime-green);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-15px);
+            border-color: rgba(50, 205, 50, 0.3);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .product-card:hover:before {
+            transform: scaleX(1);
+        }
+
+        .product-card i {
+            font-size: 60px;
+            color: var(--lime-green);
+            margin-bottom: 25px;
+            text-shadow: 0 0 15px rgba(50, 205, 50, 0.3);
+        }
+
+        .product-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            color: var(--white);
+            font-weight: 700;
+        }
+
+        .product-card p {
+            color: var(--white);
+            font-weight: 300;
+            line-height: 1.7;
+        }
+
+        /* Premium CTA Section */
+        .cta {
+            padding: 120px 0;
+            background: linear-gradient(135deg, var(--black) 0%, var(--gray) 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta:before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: radial-gradient(circle, rgba(50, 205, 50, 0.05) 0%, transparent 70%);
+            animation: pulse 10s infinite linear;
+        }
+
+        @keyframes pulse {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .cta h2 {
+            font-size: 3.2rem;
+            margin-bottom: 30px;
+            color: var(--white);
+            font-weight: 800;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            color: var(--white);
+            font-weight: 300;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Premium Footer */
+        footer {
+            background: linear-gradient(135deg, var(--gray) 0%, var(--black) 100%);
+            padding: 80px 0 30px;
+            position: relative;
+            border-top: 1px solid rgba(50, 205, 50, 0.2);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: var(--lime-green);
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background: var(--lime-green);
+            bottom: -10px;
+            left: 0;
+        }
+
+        .footer-column p, .footer-column a {
+            color: var(--white);
+            margin-bottom: 15px;
+            display: block;
+            text-decoration: none;
+            font-weight: 300;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: var(--lime-green);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--lime-green), var(--dark-green));
+            color: var(--black);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            font-size: 20px;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px) rotate(10deg);
+            box-shadow: 0 5px 15px rgba(50, 205, 50, 0.4);
+        }
+
+        .footer-btn {
+            margin-top: 15px;
+            padding: 12px 25px;
+            font-size: 0.9rem;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            font-weight: 300;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Premium Slideshow Styles */
+        .slideshow-container {
+            max-width: 100%;
+            position: relative;
+            margin: auto;
+            overflow: hidden;
+            height: 600px;
+        }
+
+        .mySlides {
+            display: none;
+            height: 100%;
+        }
+
+        .mySlides img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .fade {
+            animation-name: fade;
+            animation-duration: 1.5s;
+        }
+
+        @keyframes fade {
+            from {opacity: .4}
+            to {opacity: 1}
+        }
+
+        /* Premium Responsive Styles */
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+
+            .about-content {
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                margin-top: 20px;
+                flex-direction: column;
+                display: none;
+            }
+
+            nav ul.show {
+                display: flex;
+            }
+
+            nav ul li {
+                margin: 15px 0;
+            }
+
+            .mobile-menu {
+                display: block;
+                position: absolute;
+                top: 25px;
+                right: 20px;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .about-content {
+                flex-direction: column;
+            }
+
+            .section-title h2 {
+                font-size: 2.5rem;
+            }
+
+            .cta h2 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .btn {
+                padding: 14px 30px;
+                font-size: 0.9rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .product-card {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Premium Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-text">INNOCENT TRADERS</div>
+            </div>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#product">NAVIGATOR</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Premium Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <h1>ELITE TRADING AUTOMATION <span>NAVIGATOR</span></h1>
+            <p>The most advanced forex trading algorithm that delivers consistent profits with institutional-grade technology.</p>
+            <a href="https://paystack.shop/pay/innocenttraders" class="btn">ACQUIRE NAVIGATOR</a>
+        </div>
+    </section>
+
+    <!-- Premium About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>About Us</h2>
+                <p>INNOCENT TRADERS represents the pinnacle of algorithmic trading excellence, delivering institutional-grade automation to elite traders worldwide.</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Our Mission</h3>
+                    <p>At INNOCENT TRADERS, we've redefined automated trading by combining decades of market expertise with cutting-edge artificial intelligence. Our mission is to provide elite traders with tools that were once exclusive to financial institutions.</p>
+                    <p>Founded by trading visionary Innocent Majola, our company has disrupted the forex industry with NAVIGATOR - the most sophisticated trading algorithm that operates with precision 24/7, delivering consistent alpha generation regardless of market conditions.</p>
+                    <a href="https://wa.me/27813889472" class="btn">Connect With Founder</a>
+                </div>
+                <div class="about-image">
+                    <div class="logo-placeholder">
+                        <i class="fas fa-crown"></i>
+                        <p>INNOCENT TRADERS</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Forex Images Slideshow -->
+    <div class="slideshow-container">
+        <div class="mySlides fade">
+            <img src="https://files.imagetourl.net/uploads/1760314458812-d84e63a3-ffb7-4d60-a962-5b5ecbe8fc47.png" alt="Forex Trading">
+        </div>
+        <div class="mySlides fade">
+            <img src="https://img.freepik.com/premium-photo/financial-forecast-male-trader-working-diligently-laptop-utilizing-charts-graphs-diagrams_184353-3124.jpg" alt="Forex Charts">
+        </div>
+        <div class="mySlides fade">
+            <img src="https://tse4.mm.bing.net/th/id/OIP.o7Od0oq2HcmHO3S8OEfyBwHaFj?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Trading Platform">
+        </div>
+    </div>
+
+    <!-- Premium Product Section -->
+    <section class="product" id="product">
+        <div class="container">
+            <div class="section-title">
+                <h2>NAVIGATOR Forex Robot</h2>
+                <p>Experience the future of automated trading with our institutional-grade algorithm</p>
+            </div>
+            <div class="product-grid">
+                <div class="product-card">
+                    <i class="fas fa-robot"></i>
+                    <h3>Fully Automated</h3>
+                    <p>NAVIGATOR executes sophisticated strategies 24/7, eliminating emotional trading and maximizing profit potential.</p>
+                </div>
+                <div class="product-card">
+                    <i class="fas fa-brain"></i>
+                    <h3>AI-Powered Algorithms</h3>
+                    <p>Our proprietary AI technology adapts to market conditions in real-time, continuously optimizing performance.</p>
+                </div>
+                <div class="product-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Institutional Risk Management</h3>
+                    <p>Multi-layered protection protocols safeguard your capital with bank-level security measures.</p>
+                </div>
+                <div class="product-card">
+                    <i class="fas fa-bolt"></i>
+                    <h3>Elite Performance</h3>
+                    <p>Designed for consistent alpha generation across all market conditions with institutional-grade execution.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Premium CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready For Elite Performance?</h2>
+            <p>Join our exclusive community of elite traders who have transformed their trading with NAVIGATOR. Experience institutional-grade automation today.</p>
+            <a href="https://paystack.shop/pay/innocenttraders" class="btn">ACQUIRE NAVIGATOR NOW</a>
+        </div>
+    </section>
+
+    <!-- Premium Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>INNOCENT TRADERS</h3>
+                    <p>Redefining automated trading with institutional-grade technology and elite performance.</p>
+                    <div class="social-links">
+                        <a href="https://www.tiktok.com/@navigator_ea?is_from_webapp=1&sender_device=pc" target="_blank"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://www.instagram.com/navigator_ea?igsh=ZG1xNTBieTg4NjZ2&utm_source=qr" target="_blank"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <a href="#home">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#product">NAVIGATOR</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-user"></i> Innocent Majola</p>
+                    <p><i class="fab fa-whatsapp"></i> +27 81 388 9472</p>
+                    <a href="https://wa.me/27813889472" class="btn footer-btn">WhatsApp Us</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 INNOCENT TRADERS. All rights reserved. | Elite Trading Automation</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const navMenu = document.querySelector('nav ul');
+
+            if (mobileMenu) {
+                mobileMenu.addEventListener('click', function() {
+                    navMenu.classList.toggle('show');
+                });
+            }
+
+            // Close mobile menu when clicking on a link
+            const navLinks = document.querySelectorAll('nav ul li a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    if (navMenu.classList.contains('show')) {
+                        navMenu.classList.remove('show');
+                    }
+                });
+            });
+
+            // Slideshow functionality
+            let slideIndex = 0;
+            showSlides();
+
+            function showSlides() {
+                let slides = document.getElementsByClassName("mySlides");
+                for (let i = 0; i < slides.length; i++) {
+                    slides[i].style.display = "none";
+                }
+                slideIndex++;
+                if (slideIndex > slides.length) {
+                    slideIndex = 1;
+                }
+                if (slides.length > 0) {
+                    slides[slideIndex-1].style.display = "block";
+                    setTimeout(showSlides, 5000); // Change image every 5 seconds
+                }
+            }
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Header scroll effect
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('header');
+                if (window.scrollY > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Add animation to product cards on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe product cards
+            const productCards = document.querySelectorAll('.product-card');
+            productCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
