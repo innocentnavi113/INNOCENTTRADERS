@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INNOCENT TRADERS | Premium NAVIGATOR Forex Automation</title>
+    <title>INNOCENT TRADERS | NAVIGATOR V2 Forex Automation</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -15,6 +15,7 @@
             --gray: #1a1a1a;
             --light-gray: #f5f5f5;
             --gold: #FFD700;
+            --discount-red: #ff3333;
         }
 
         * {
@@ -38,10 +39,83 @@
             padding: 0 20px;
         }
 
+        /* Discount Banner */
+        .discount-banner {
+            background: linear-gradient(90deg, var(--discount-red), #ff6666);
+            color: var(--white);
+            text-align: center;
+            padding: 15px 0;
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1001;
+            box-shadow: 0 3px 10px rgba(255, 51, 51, 0.3);
+        }
+
+        .discount-banner span {
+            background-color: var(--black);
+            padding: 3px 10px;
+            border-radius: 20px;
+            margin: 0 5px;
+            font-weight: 800;
+        }
+
+        /* Countdown Timer */
+        .countdown-container {
+            background: rgba(10, 10, 10, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+            border: 2px solid var(--discount-red);
+            box-shadow: 0 0 20px rgba(255, 51, 51, 0.3);
+        }
+
+        .countdown-title {
+            text-align: center;
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: var(--white);
+            font-weight: 700;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .countdown-item {
+            text-align: center;
+            background: linear-gradient(135deg, var(--discount-red), #cc0000);
+            border-radius: 10px;
+            padding: 15px 10px;
+            min-width: 80px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .countdown-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--white);
+            line-height: 1;
+        }
+
+        .countdown-label {
+            font-size: 0.9rem;
+            color: var(--white);
+            margin-top: 5px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
         /* Premium Header Styles */
         header {
             background-color: rgba(10, 10, 10, 0.95);
-            position: fixed;
+            position: sticky;
+            top: 0;
             width: 100%;
             z-index: 1000;
             padding: 20px 0;
@@ -124,7 +198,7 @@
         /* Premium Hero Section */
         .hero {
             height: 100vh;
-            background: linear-gradient(rgba(10, 10, 10, 0.85), rgba(10, 10, 10, 0.9)), url('https://files.imagetourl.net/uploads/1760313720621-53daf037-cb05-4fa2-9cf3-9ae4c848a4cf.jpg');
+            background: linear-gradient(rgba(10, 10, 10, 0.85), rgba(10, 10, 10, 0.9)), url('https://i.ibb.co/zTLRW0rW/forex-hero.jpg');
             background-size: cover;
             background-position: center;
             display: flex;
@@ -224,6 +298,110 @@
 
         .btn:hover:before {
             left: 100%;
+        }
+
+        .discount-btn {
+            background: linear-gradient(135deg, var(--discount-red), #cc0000);
+            box-shadow: 0 5px 15px rgba(255, 51, 51, 0.3);
+        }
+
+        .discount-btn:hover {
+            box-shadow: 0 10px 25px rgba(255, 51, 51, 0.5);
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 80px 0;
+            background-color: var(--black);
+        }
+
+        .pricing-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .pricing-card {
+            background: linear-gradient(145deg, rgba(40, 40, 40, 0.9), rgba(20, 20, 20, 0.95));
+            border-radius: 15px;
+            padding: 40px 30px;
+            text-align: center;
+            width: 350px;
+            border: 2px solid rgba(50, 205, 50, 0.2);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card.featured {
+            border-color: var(--lime-green);
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(50, 205, 50, 0.2);
+        }
+
+        .pricing-card.featured:before {
+            content: 'MOST POPULAR';
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: var(--lime-green);
+            color: var(--black);
+            padding: 5px 30px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            transform: rotate(45deg);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--lime-green);
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+
+        .pricing-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--white);
+            font-weight: 700;
+        }
+
+        .price {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--lime-green);
+            margin-bottom: 10px;
+        }
+
+        .price span {
+            font-size: 1.5rem;
+            color: var(--white);
+            text-decoration: line-through;
+            opacity: 0.7;
+            margin-right: 10px;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            font-weight: 300;
+        }
+
+        .pricing-features li:before {
+            content: '✓';
+            color: var(--lime-green);
+            font-weight: bold;
+            margin-right: 10px;
         }
 
         /* Premium About Section */
@@ -336,8 +514,8 @@
 
         /* Premium Product Section */
         .product {
-            padding: 100px 0;
-            background: linear-gradient(rgba(10, 10, 10, 0.9), rgba(10, 10, 10, 0.9)), url('https://files.imagetourl.net/uploads/1760313720621-53daf037-cb05-4fa2-9cf3-9ae4c848a4cf.jpg');
+            padding: 120px 0;
+            background: linear-gradient(rgba(10, 10, 10, 0.9), rgba(10, 10, 10, 0.9)), url('https://i.ibb.co/x8BDtSyQ/Whats-App-Image-2025-11-17-at-02-25-13.jpg');
             background-size: cover;
             background-attachment: fixed;
             position: relative;
@@ -586,6 +764,19 @@
             .about-content {
                 gap: 40px;
             }
+
+            .pricing-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+
+            .pricing-card.featured:hover {
+                transform: translateY(-10px);
+            }
         }
 
         @media (max-width: 768px) {
@@ -634,6 +825,10 @@
             .cta h2 {
                 font-size: 2.5rem;
             }
+
+            .countdown {
+                flex-wrap: wrap;
+            }
         }
 
         @media (max-width: 480px) {
@@ -653,10 +848,24 @@
             .product-card {
                 padding: 30px 20px;
             }
+
+            .countdown-item {
+                min-width: 70px;
+                padding: 12px 8px;
+            }
+
+            .countdown-number {
+                font-size: 1.8rem;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Discount Banner -->
+    <div class="discount-banner">
+        LIMITED TIME OFFER: <span>SPECIAL PRICING</span> - OFFER ENDS DECEMBER 2TH!
+    </div>
+
     <!-- Premium Header -->
     <header>
         <div class="container header-container">
@@ -669,8 +878,9 @@
             <nav>
                 <ul>
                     <li><a href="#home">Home</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
                     <li><a href="#about">About</a></li>
-                    <li><a href="#product">NAVIGATOR</a></li>
+                    <li><a href="#product">NAVIGATOR V2</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
@@ -680,9 +890,89 @@
     <!-- Premium Hero Section -->
     <section class="hero" id="home">
         <div class="container hero-content">
-            <h1>ELITE TRADING AUTOMATION <span>NAVIGATOR</span></h1>
-            <p>The most advanced forex trading algorithm that delivers consistent profits with institutional-grade technology.</p>
-            <a href="https://paystack.shop/pay/innocenttraders" class="btn">ACQUIRE NAVIGATOR</a>
+            <h1>NAVIGATOR <span>V2</span> </h1>
+            <p>The next generation of forex trading automation is here. Experience unprecedented performance with our advanced AI algorithms.</p>
+
+            <!-- Countdown Timer -->
+            <div class="countdown-container">
+                <div class="countdown-title">Limited Time Offer Ends In:</div>
+                <div class="countdown">
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="days">00</div>
+                        <div class="countdown-label">Days</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="hours">00</div>
+                        <div class="countdown-label">Hours</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="minutes">00</div>
+                        <div class="countdown-label">Minutes</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="seconds">00</div>
+                        <div class="countdown-label">Seconds</div>
+                    </div>
+                </div>
+            </div>
+
+            <a href="#pricing" class="btn discount-btn">VIEW PRICING</a>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-title">
+                <h2>Special Launch Pricing</h2>
+                <p>Take advantage of our limited-time launch pricing for NAVIGATOR V2</p>
+            </div>
+            <div class="pricing-container">
+                <div class="pricing-card">
+                    <h3 class="pricing-title">NAVIGATOR V2 MOBILE</h3>
+                    <div class="price">$45</div>
+                    <ul class="pricing-features">
+                        <li>Full NAVIGATOR V2 Algorithm</li>
+                        <li>Mobile App Access</li>
+                        <li>Real-time Trading Signals</li>
+                        <li>Basic Setup Support</li>
+                        <li>3 Months of Updates</li>
+                        <li>Email Support</li>
+                        <li>Compatible with Android & iOS</li>
+                    </ul>
+                    <a href="https://paystack.shop/pay/innocenttraders" class="btn">GET MOBILE VERSION</a>
+                </div>
+                <div class="pricing-card featured">
+                    <h3 class="pricing-title">NAVIGATOR V2 PC</h3>
+                    <div class="price">$111</div>
+                    <ul class="pricing-features">
+                        <li>Full NAVIGATOR V2 Algorithm</li>
+                        <li>Desktop Application</li>
+                        <li>Advanced Charting Tools</li>
+                        <li>Priority Setup Support</li>
+                        <li>Lifetime Updates</li>
+                        <li>Priority Email & Chat Support</li>
+                        <li>Advanced Strategy Customization</li>
+                        <li>Compatible with Windows & Mac</li>
+                    </ul>
+                    <a href="https://paystack.shop/pay/innocenttraders" class="btn discount-btn">GET PC VERSION</a>
+                </div>
+                <div class="pricing-card">
+                    <h3 class="pricing-title">COMPLETE BUNDLE</h3>
+                    <div class="price">$139</div>
+                    <ul class="pricing-features">
+                        <li>Both Mobile & PC Versions</li>
+                        <li>Sync Across All Devices</li>
+                        <li>Dedicated Account Manager</li>
+                        <li>Lifetime Updates & Support</li>
+                        <li>Phone & WhatsApp Support</li>
+                        <li>Complete Strategy Library</li>
+                        <li>Custom Strategy Development</li>
+                        <li>1-on-1 Training Session</li>
+                    </ul>
+                    <a href="https://paystack.shop/pay/innocenttraders" class="btn">GET COMPLETE BUNDLE</a>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -697,7 +987,7 @@
                 <div class="about-text">
                     <h3>Our Mission</h3>
                     <p>At INNOCENT TRADERS, we've redefined automated trading by combining decades of market expertise with cutting-edge artificial intelligence. Our mission is to provide elite traders with tools that were once exclusive to financial institutions.</p>
-                    <p>Founded by trading visionary Innocent Majola, our company has disrupted the forex industry with NAVIGATOR - the most sophisticated trading algorithm that operates with precision 24/7, delivering consistent alpha generation regardless of market conditions.</p>
+                    <p>Founded by trading visionary Innocent Majola, our company has disrupted the forex industry with NAVIGATOR V2 - the most sophisticated trading algorithm that operates with precision 24/7, delivering consistent alpha generation regardless of market conditions.</p>
                     <a href="https://wa.me/27813889472" class="btn">Connect With Founder</a>
                 </div>
                 <div class="about-image">
@@ -713,13 +1003,13 @@
     <!-- Forex Images Slideshow -->
     <div class="slideshow-container">
         <div class="mySlides fade">
-            <img src="https://files.imagetourl.net/uploads/1760314458812-d84e63a3-ffb7-4d60-a962-5b5ecbe8fc47.png" alt="Forex Trading">
+            <img src="https://i.ibb.co/5Wf2mpZS/Whats-App-Image-2025-11-17-at-02-19-50.jpg" alt="Forex Trading">
         </div>
         <div class="mySlides fade">
-            <img src="https://img.freepik.com/premium-photo/financial-forecast-male-trader-working-diligently-laptop-utilizing-charts-graphs-diagrams_184353-3124.jpg" alt="Forex Charts">
+            <img src=https://i.ibb.co/pr9TTCpv/Screenshot-2025-10-20-174552.png" alt="Forex Charts">
         </div>
         <div class="mySlides fade">
-            <img src="https://tse4.mm.bing.net/th/id/OIP.o7Od0oq2HcmHO3S8OEfyBwHaFj?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Trading Platform">
+            <img src="https://i.ibb.co/SD2dRnPj/Screenshot-2025-11-14-142424.png" alt="Forex Charts">
         </div>
     </div>
 
@@ -727,14 +1017,14 @@
     <section class="product" id="product">
         <div class="container">
             <div class="section-title">
-                <h2>NAVIGATOR Forex Robot</h2>
+                <h2>NAVIGATOR V2 Forex Robot</h2>
                 <p>Experience the future of automated trading with our institutional-grade algorithm</p>
             </div>
             <div class="product-grid">
                 <div class="product-card">
                     <i class="fas fa-robot"></i>
                     <h3>Fully Automated</h3>
-                    <p>NAVIGATOR executes sophisticated strategies 24/7, eliminating emotional trading and maximizing profit potential.</p>
+                    <p>NAVIGATOR V2 executes sophisticated strategies 24/7, eliminating emotional trading and maximizing profit potential.</p>
                 </div>
                 <div class="product-card">
                     <i class="fas fa-brain"></i>
@@ -759,8 +1049,8 @@
     <section class="cta">
         <div class="container">
             <h2>Ready For Elite Performance?</h2>
-            <p>Join our exclusive community of elite traders who have transformed their trading with NAVIGATOR. Experience institutional-grade automation today.</p>
-            <a href="https://paystack.shop/pay/innocenttraders" class="btn">ACQUIRE NAVIGATOR NOW</a>
+            <p>Join our exclusive community of elite traders who have transformed their trading with NAVIGATOR V2. Experience institutional-grade automation today.</p>
+            <a href="#pricing" class="btn discount-btn">VIEW PRICING NOW</a>
         </div>
     </section>
 
@@ -771,16 +1061,19 @@
                 <div class="footer-column">
                     <h3>INNOCENT TRADERS</h3>
                     <p>Redefining automated trading with institutional-grade technology and elite performance.</p>
+                    <p>no refunds.</p>
                     <div class="social-links">
                         <a href="https://www.tiktok.com/@navigator_ea?is_from_webapp=1&sender_device=pc" target="_blank"><i class="fab fa-tiktok"></i></a>
                         <a href="https://www.instagram.com/navigator_ea?igsh=ZG1xNTBieTg4NjZ2&utm_source=qr" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://youtube.com/@innocent.trades?si=qT7mQ5oaJbm3JLJp" target="_blank"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
                 <div class="footer-column">
                     <h3>Quick Links</h3>
                     <a href="#home">Home</a>
+                    <a href="#pricing">Pricing</a>
                     <a href="#about">About</a>
-                    <a href="#product">NAVIGATOR</a>
+                    <a href="#product">NAVIGATOR V2</a>
                     <a href="#contact">Contact</a>
                 </div>
                 <div class="footer-column">
@@ -791,12 +1084,46 @@
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2023 INNOCENT TRADERS. All rights reserved. | Elite Trading Automation</p>
+                <p>&copy; 2025 INNOCENT TRADERS. All rights reserved. | Elite Trading Automation</p>
             </div>
         </div>
     </footer>
 
     <script>
+        // Countdown Timer
+        function updateCountdown() {
+            // Set the countdown date to December 2, 2025
+            const countdownDate = new Date('December 2, 2025 23:59:59').getTime();
+            const now = new Date().getTime();
+            const distance = countdownDate - now;
+
+            // If the countdown is over
+            if (distance < 0) {
+                document.getElementById('days').innerHTML = '00';
+                document.getElementById('hours').innerHTML = '00';
+                document.getElementById('minutes').innerHTML = '00';
+                document.getElementById('seconds').innerHTML = '00';
+                document.querySelector('.countdown-title').innerHTML = 'Offer Has Expired!';
+                return;
+            }
+
+            // Calculate days, hours, minutes and seconds
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Display the results
+            document.getElementById('days').innerHTML = days.toString().padStart(2, '0');
+            document.getElementById('hours').innerHTML = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').innerHTML = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').innerHTML = seconds.toString().padStart(2, '0');
+        }
+
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Initial call
+
         // Mobile menu toggle
         document.addEventListener('DOMContentLoaded', function() {
             const mobileMenu = document.querySelector('.mobile-menu');
