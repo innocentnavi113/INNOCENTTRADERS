@@ -303,7 +303,7 @@
             font-size: 0.85rem;
         }
 
-        /* 4D Holographic Header with Horizontal Menu */
+        /* 4D Holographic Header - HORIZONTAL ON ALL DEVICES */
         header {
             background: linear-gradient(180deg,
                 rgba(10, 10, 26, 0.98) 0%,
@@ -347,31 +347,49 @@
                        textGlitch 30s infinite;
         }
 
-        /* HORIZONTAL NAVIGATION */
+        /* HORIZONTAL NAVIGATION - WORKS ON MOBILE TOO */
+        nav {
+            display: block;
+            width: auto;
+        }
+
         nav ul {
             display: flex;
             list-style: none;
-            gap: 25px;
+            gap: 15px;
             margin: 0;
             padding: 0;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        nav ul::-webkit-scrollbar {
+            display: none;
         }
 
         nav ul li {
             position: relative;
+            flex-shrink: 0;
         }
 
         nav ul li a {
             color: var(--off-white);
             text-decoration: none;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             letter-spacing: 1px;
-            padding: 8px 0;
+            padding: 8px 12px;
             position: relative;
             transition: all 0.3s ease;
             font-family: 'Orbitron', monospace;
             white-space: nowrap;
             animation: textGlitch 25s infinite;
+            display: block;
+            border-radius: 4px;
+            background: rgba(0, 255, 136, 0.05);
         }
 
         nav ul li a::after {
@@ -602,7 +620,7 @@
             animation: pulse4D 2s infinite alternate-reverse;
         }
 
-        /* 3D HORIZONTAL PRICING GRID */
+        /* 3D HORIZONTAL PRICING GRID - WORKS ON MOBILE */
         .pricing-3d {
             padding: 60px 0;
             position: relative;
@@ -634,15 +652,33 @@
                        textGlitch 35s infinite;
         }
 
-        /* HORIZONTAL PRICING GRID */
+        /* HORIZONTAL PRICING GRID - SCROLLABLE ON MOBILE */
         .pricing-grid-3d {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            display: flex;
             gap: 30px;
             position: relative;
             z-index: 2;
             max-width: 1200px;
             margin: 0 auto;
+            overflow-x: auto;
+            padding: 20px 10px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--neon-green) transparent;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .pricing-grid-3d::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .pricing-grid-3d::-webkit-scrollbar-track {
+            background: rgba(0, 255, 136, 0.1);
+            border-radius: 10px;
+        }
+
+        .pricing-grid-3d::-webkit-scrollbar-thumb {
+            background: linear-gradient(90deg, var(--neon-green), var(--hologram-blue));
+            border-radius: 10px;
         }
 
         /* 4D PRICING CARDS - KEPT HORIZONTAL */
@@ -662,7 +698,8 @@
             box-shadow:
                 0 15px 30px rgba(0, 0, 0, 0.4),
                 inset 0 0 25px rgba(0, 255, 136, 0.1);
-            width: 100%;
+            width: 350px;
+            flex-shrink: 0;
             margin: 0 auto;
             animation: float4D 15s infinite ease-in-out;
         }
@@ -706,6 +743,24 @@
             margin: 25px 0;
             text-align: left;
             padding: 0 10px;
+            max-height: 400px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--neon-green) transparent;
+        }
+
+        .pricing-features-3d::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .pricing-features-3d::-webkit-scrollbar-track {
+            background: rgba(0, 255, 136, 0.1);
+            border-radius: 10px;
+        }
+
+        .pricing-features-3d::-webkit-scrollbar-thumb {
+            background: var(--neon-green);
+            border-radius: 10px;
         }
 
         .pricing-features-3d li {
@@ -764,7 +819,7 @@
         .hologram-slide:nth-child(2) { animation-delay: 6s; }
         .hologram-slide:nth-child(3) { animation-delay: 12s; }
 
-        /* 3D Product Grid - KEPT HORIZONTAL */
+        /* 3D Product Grid - HORIZONTAL ON MOBILE */
         .product-3d {
             padding: 60px 0;
             position: relative;
@@ -774,13 +829,31 @@
         }
 
         .product-grid-3d {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            display: flex;
             gap: 25px;
             position: relative;
             z-index: 2;
             max-width: 1200px;
             margin: 0 auto;
+            overflow-x: auto;
+            padding: 20px 10px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--neon-green) transparent;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .product-grid-3d::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .product-grid-3d::-webkit-scrollbar-track {
+            background: rgba(0, 255, 136, 0.1);
+            border-radius: 10px;
+        }
+
+        .product-grid-3d::-webkit-scrollbar-thumb {
+            background: linear-gradient(90deg, var(--neon-green), var(--hologram-blue));
+            border-radius: 10px;
         }
 
         .product-card-3d {
@@ -798,6 +871,8 @@
             box-shadow:
                 0 12px 25px rgba(0, 0, 0, 0.3),
                 inset 0 0 20px rgba(0, 255, 136, 0.1);
+            width: 280px;
+            flex-shrink: 0;
             animation: float4D 18s infinite ease-in-out;
         }
 
@@ -824,83 +899,163 @@
             animation: textGlitch 25s infinite;
         }
 
-        /* RESPONSIVE DESIGN */
+        /* 4D Footer - HORIZONTAL ON MOBILE */
+        .footer-4d {
+            background: linear-gradient(180deg,
+                var(--space-blue) 0%,
+                var(--black) 100%);
+            padding: 60px 0 30px;
+            position: relative;
+            border-top: 2px solid rgba(0, 255, 136, 0.3);
+            overflow: hidden;
+        }
+
+        .footer-content-4d {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 2;
+            overflow-x: auto;
+            padding: 20px 10px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--neon-green) transparent;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .footer-content-4d::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .footer-content-4d::-webkit-scrollbar-track {
+            background: rgba(0, 255, 136, 0.1);
+            border-radius: 10px;
+        }
+
+        .footer-content-4d::-webkit-scrollbar-thumb {
+            background: linear-gradient(90deg, var(--neon-green), var(--hologram-blue));
+            border-radius: 10px;
+        }
+
+        .footer-column-4d {
+            min-width: 300px;
+            flex-shrink: 0;
+        }
+
+        .footer-column-4d h3 {
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            color: var(--neon-green);
+            font-weight: 800;
+            position: relative;
+            display: inline-block;
+            font-family: 'Orbitron', monospace;
+            letter-spacing: 2px;
+            line-height: 1.2;
+            animation: rgbSplit 5s infinite alternate,
+                       textGlitch 30s infinite;
+        }
+
+        .footer-column-4d p, .footer-column-4d a {
+            color: var(--off-white);
+            margin-bottom: 15px;
+            display: block;
+            text-decoration: none;
+            font-weight: 300;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .social-links-4d {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .social-links-4d a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg,
+                rgba(0, 255, 136, 0.2),
+                rgba(0, 255, 255, 0.2));
+            color: var(--neon-green);
+            border-radius: 50%;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 20px;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            flex-shrink: 0;
+        }
+
+        .copyright-4d {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--off-white);
+            font-weight: 300;
+            position: relative;
+            z-index: 2;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            line-height: 1.4;
+        }
+
+        /* RESPONSIVE DESIGN - ALL DEVICES GET HORIZONTAL LAYOUT */
         @media (max-width: 1200px) {
-            .pricing-grid-3d {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 20px;
-            }
-
-            .product-grid-3d {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
-            }
-
             nav ul {
-                gap: 15px;
+                gap: 10px;
             }
 
             .logo-text {
                 font-size: 1.5rem;
             }
+
+            .pricing-card-3d {
+                width: 320px;
+            }
+
+            .product-card-3d {
+                width: 250px;
+            }
         }
 
         @media (max-width: 992px) {
-            .pricing-grid-3d {
-                grid-template-columns: 1fr;
-                max-width: 500px;
-            }
-
-            .product-grid-3d {
-                grid-template-columns: 1fr;
-                max-width: 500px;
-            }
-
-            nav ul {
-                display: none;
-                position: fixed;
-                top: 70px;
-                left: 0;
-                width: 100%;
-                background: rgba(10, 10, 26, 0.98);
-                backdrop-filter: blur(20px);
-                flex-direction: column;
-                padding: 20px;
-                gap: 15px;
-                border-top: 1px solid rgba(0, 255, 136, 0.3);
-                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
-                z-index: 1000;
-                max-height: calc(100vh - 70px);
-                overflow-y: auto;
-            }
-
-            nav ul.show {
-                display: flex;
-            }
-
-            nav ul li {
-                width: 100%;
-                text-align: center;
-            }
-
-            nav ul li a {
-                font-size: 1.1rem;
-                padding: 12px;
-                display: block;
-                width: 100%;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            }
-
-            .mobile-menu {
-                display: block;
-            }
-
             .hero h1 {
                 font-size: 2.2rem;
             }
 
             .section-title-3d h2 {
                 font-size: 1.8rem;
+            }
+
+            .logo-text {
+                font-size: 1.3rem;
+                letter-spacing: 1px;
+            }
+
+            nav ul li a {
+                font-size: 0.8rem;
+                padding: 8px 10px;
+            }
+
+            .mobile-menu {
+                display: none; /* We keep horizontal nav always visible */
+            }
+
+            .pricing-card-3d {
+                width: 300px;
+            }
+
+            .product-card-3d {
+                width: 230px;
+            }
+
+            .footer-column-4d {
+                min-width: 280px;
             }
         }
 
@@ -927,6 +1082,7 @@
             .hero h1 {
                 animation: rgbSplitMobile 6s infinite alternate,
                            textGlitchMobile 60s infinite;
+                font-size: 1.8rem;
             }
 
             @keyframes rgbSplitMobile {
@@ -963,6 +1119,9 @@
             .hologram-btn {
                 animation: pulse4DMobile 4s infinite alternate,
                            subtleGlitchMobile 30s infinite;
+                padding: 14px 30px;
+                font-size: 0.85rem;
+                min-width: 180px;
             }
 
             @keyframes pulse4DMobile {
@@ -979,15 +1138,61 @@
                         0 0 40px rgba(0, 255, 136, 0.3);
                 }
             }
+
+            /* Keep horizontal layout but adjust spacing */
+            nav ul {
+                gap: 8px;
+            }
+
+            nav ul li a {
+                font-size: 0.75rem;
+                padding: 6px 8px;
+            }
+
+            .logo-text {
+                font-size: 1.1rem;
+            }
+
+            .pricing-card-3d {
+                width: 280px;
+                padding: 25px 15px;
+            }
+
+            .product-card-3d {
+                width: 200px;
+                padding: 20px 15px;
+            }
+
+            .hologram-slideshow {
+                height: 300px;
+            }
+
+            .countdown-grid {
+                gap: 8px;
+            }
+
+            .countdown-cell {
+                padding: 12px 6px;
+                min-height: 80px;
+            }
+
+            .countdown-number {
+                font-size: 1.8rem;
+            }
         }
 
         @media (max-width: 480px) {
             .logo-text {
-                font-size: 1.3rem;
+                font-size: 1rem;
+            }
+
+            nav ul li a {
+                font-size: 0.7rem;
+                padding: 5px 6px;
             }
 
             .hero h1 {
-                font-size: 1.8rem;
+                font-size: 1.5rem;
             }
 
             .section-title-3d h2 {
@@ -998,9 +1203,30 @@
                 font-size: 2.2rem;
             }
 
-            .pricing-card-3d,
-            .product-card-3d {
+            .pricing-card-3d {
+                width: 260px;
                 padding: 20px 12px;
+            }
+
+            .product-card-3d {
+                width: 180px;
+                padding: 15px 10px;
+            }
+
+            .product-card-3d i {
+                font-size: 40px;
+            }
+
+            .product-card-3d h3 {
+                font-size: 1.2rem;
+            }
+
+            .footer-column-4d {
+                min-width: 250px;
+            }
+
+            .hologram-slideshow {
+                height: 250px;
             }
         }
 
@@ -1022,6 +1248,24 @@
             }
         }
 
+        /* For touch devices, add active states */
+        @media (hover: none) and (pointer: coarse) {
+            .pricing-card-3d:active,
+            .product-card-3d:active,
+            .countdown-cell:active {
+                animation-play-state: paused;
+                transform: translateZ(20px) scale(1.05);
+                box-shadow:
+                    0 20px 40px rgba(0, 255, 136, 0.3),
+                    inset 0 0 30px rgba(0, 255, 136, 0.2);
+            }
+
+            .hologram-btn:active {
+                animation-play-state: paused;
+                transform: scale(1.1) rotateX(5deg) rotateY(5deg);
+            }
+        }
+
         /* Reduced Motion Preference */
         @media (prefers-reduced-motion: reduce) {
             *,
@@ -1038,85 +1282,32 @@
             will-change: transform, opacity, filter;
         }
 
-        /* Footer Styles */
-        .footer-4d {
-            background: linear-gradient(180deg,
-                var(--space-blue) 0%,
-                var(--black) 100%);
-            padding: 60px 0 30px;
+        /* Touch-friendly scroll indicators */
+        .scroll-hint {
             position: relative;
-            border-top: 2px solid rgba(0, 255, 136, 0.3);
-            overflow: hidden;
+            padding-right: 20px;
         }
 
-        .footer-content-4d {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-            margin-bottom: 40px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .footer-column-4d h3 {
-            font-size: 1.6rem;
-            margin-bottom: 20px;
+        .scroll-hint::after {
+            content: '→';
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
             color: var(--neon-green);
-            font-weight: 800;
-            position: relative;
-            display: inline-block;
-            font-family: 'Orbitron', monospace;
-            letter-spacing: 2px;
-            line-height: 1.2;
-            animation: rgbSplit 5s infinite alternate,
-                       textGlitch 30s infinite;
+            animation: bounceRight 2s infinite;
+            opacity: 0.7;
         }
 
-        .footer-column-4d p, .footer-column-4d a {
-            color: var(--off-white);
-            margin-bottom: 15px;
-            display: block;
-            text-decoration: none;
-            font-weight: 300;
-            transition: all 0.3s ease;
-            font-size: 1rem;
-            line-height: 1.5;
+        @keyframes bounceRight {
+            0%, 100% { transform: translateY(-50%) translateX(0); }
+            50% { transform: translateY(-50%) translateX(5px); }
         }
 
-        .social-links-4d {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .social-links-4d a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg,
-                rgba(0, 255, 136, 0.2),
-                rgba(0, 255, 255, 0.2));
-            color: var(--neon-green);
-            border-radius: 50%;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            font-size: 20px;
-            border: 1px solid rgba(0, 255, 136, 0.3);
-            flex-shrink: 0;
-        }
-
-        .copyright-4d {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: var(--off-white);
-            font-weight: 300;
-            position: relative;
-            z-index: 2;
-            font-size: 0.95rem;
-            letter-spacing: 1px;
-            line-height: 1.4;
+        /* Ensure horizontal scrolling works well */
+        .scroll-container {
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
         }
     </style>
 </head>
@@ -1138,15 +1329,12 @@
         <span>LIMITED TIME</span>NAVI SPECIAL PRICING <span>ENDS DEC 28</span>
     </div>
 
-    <!-- 4D Holographic Header with Horizontal Menu -->
+    <!-- 4D Holographic Header - ALWAYS HORIZONTAL -->
     <header>
         <div class="container header-container">
             <div class="logo">
                 <div class="logo-text">INNOCENT TRADERS</div>
             </div>
-            <button class="mobile-menu" aria-label="Toggle menu">
-                <i class="fas fa-bars"></i>
-            </button>
             <nav>
                 <ul>
                     <li><a href="#home" class="nav-link">Home</a></li>
@@ -1193,14 +1381,14 @@
         </div>
     </section>
 
-    <!-- 3D Pricing Section with Horizontal Layout -->
+    <!-- 3D Pricing Section - HORIZONTAL SCROLL ON MOBILE -->
     <section class="pricing-3d" id="pricing">
         <div class="container">
             <div class="section-title-3d">
                 <h2 class="will-change">NAVI PRICING</h2>
                 <p>Secure your future in algorithmic trading with our groundbreaking pricing structure</p>
             </div>
-            <div class="pricing-grid-3d">
+            <div class="pricing-grid-3d scroll-container">
                 <div class="pricing-card-3d will-change">
                     <h3 class="pricing-title-3d">MOBILE EDITION</h3>
                     <div class="price-3d">$45</div>
@@ -1213,6 +1401,8 @@
                         <li>Email Support Portal</li>
                         <li>Android & iOS Compatibility</li>
                         <li>Basic Risk Management</li>
+                        <li>Daily Performance Reports</li>
+                        <li>24/7 Market Monitoring</li>
                     </ul>
                     <a href="https://paystack.shop/pay/innocenttraders" class="hologram-btn">GET MOBILE</a>
                 </div>
@@ -1230,6 +1420,8 @@
                         <li>Windows & Mac OS Compatibility</li>
                         <li>Advanced Risk Protocols</li>
                         <li>Performance Analytics Dashboard</li>
+                        <li>Multi-Account Management</li>
+                        <li>Backtesting Capabilities</li>
                     </ul>
                     <a href="https://paystack.shop/pay/innocenttraders" class="hologram-btn">GET NAVIGATOR V2 PC</a>
                 </div>
@@ -1248,6 +1440,7 @@
                         <li>Early Access to New Features</li>
                         <li>VIP Webinar Access</li>
                         <li>Advanced Risk Management Suite</li>
+                        <li>Monthly Strategy Optimization</li>
                     </ul>
                     <a href="https://paystack.shop/pay/innocenttraders" class="hologram-btn">GET OMEGA BUNDLE</a>
                 </div>
@@ -1270,14 +1463,14 @@
         </div>
     </div>
 
-    <!-- 3D Product Section with Horizontal Layout -->
+    <!-- 3D Product Section - HORIZONTAL SCROLL ON MOBILE -->
     <section class="product-3d" id="product">
         <div class="container">
             <div class="section-title-3d">
                 <h2 class="will-change">NAVI FEATURES</h2>
                 <p>Experience the power of next-generation trading technology</p>
             </div>
-            <div class="product-grid-3d">
+            <div class="product-grid-3d scroll-container">
                 <div class="product-card-3d will-change">
                     <i class="fas fa-robot"></i>
                     <h3>NAVI Automation</h3>
@@ -1302,10 +1495,10 @@
         </div>
     </section>
 
-    <!-- 4D Footer -->
+    <!-- 4D Footer - HORIZONTAL SCROLL ON MOBILE -->
     <footer class="footer-4d" id="contact">
         <div class="container">
-            <div class="footer-content-4d">
+            <div class="footer-content-4d scroll-container">
                 <div class="footer-column-4d">
                     <h3 class="will-change">INNOCENT TRADERS</h3>
                     <p>Redefining automated trading with quantum-grade technology and elite performance metrics.</p>
@@ -1328,7 +1521,7 @@
                     <h3 class="will-change">NAVI CONTACT</h3>
                     <p><i class="fas fa-user"></i> Innocent Majola</p>
                     <p><i class="fab fa-whatsapp"></i> +27 81 388 9472</p>
-                    <a href="https://wa.me/27813889472" class="hologram-btn will-change">NAVI SUPPORT CHAT</a>
+                    <a href="https://wa.me/27813889472" class="hologram-btn will-change" style="margin-top: 15px; display: inline-block;">NAVI SUPPORT CHAT</a>
                 </div>
             </div>
             <div class="copyright-4d">
@@ -1376,68 +1569,114 @@
         setInterval(updateCountdown, 1000);
         updateCountdown();
 
-        // 4D Parallax Effect
-        document.addEventListener('mousemove', (e) => {
-            const x = (e.clientX / window.innerWidth - 0.5) * 20;
-            const y = (e.clientY / window.innerHeight - 0.5) * 20;
+        // 4D Parallax Effect - optimized for mobile
+        let isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        let touchStartX = 0;
+        let touchStartY = 0;
 
-            document.querySelectorAll('.will-change').forEach(el => {
-                el.style.transform = `perspective(1000px) rotateX(${y}deg) rotateY(${x}deg)`;
-            });
+        if (!isMobile) {
+            // Desktop parallax
+            document.addEventListener('mousemove', (e) => {
+                const x = (e.clientX / window.innerWidth - 0.5) * 20;
+                const y = (e.clientY / window.innerHeight - 0.5) * 20;
 
-            // Hero background parallax
-            const heroBg = document.getElementById('parallax-bg');
-            if (heroBg) {
-                const moveX = x * 0.5;
-                const moveY = y * 0.5;
-                heroBg.style.transform = `translate3d(${moveX}px, ${moveY}px, 0)`;
-            }
-        });
-
-        // Mobile menu toggle
-        document.addEventListener('DOMContentLoaded', function() {
-            const mobileMenu = document.querySelector('.mobile-menu');
-            const navMenu = document.querySelector('nav ul');
-            const body = document.body;
-
-            if (mobileMenu) {
-                mobileMenu.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-
-                    // Add glitch effect
-                    this.style.animation = 'rgbSplit 0.3s';
-                    setTimeout(() => {
-                        this.style.animation = '';
-                    }, 300);
-
-                    navMenu.classList.toggle('show');
-                    this.classList.toggle('active');
-                    body.classList.toggle('menu-open');
+                document.querySelectorAll('.will-change').forEach(el => {
+                    el.style.transform = `perspective(1000px) rotateX(${y}deg) rotateY(${x}deg)`;
                 });
-            }
 
-            // Close mobile menu when clicking outside
-            document.addEventListener('click', function(e) {
-                if (navMenu.classList.contains('show') &&
-                    !navMenu.contains(e.target) &&
-                    !mobileMenu.contains(e.target)) {
-                    navMenu.classList.remove('show');
-                    mobileMenu.classList.remove('active');
-                    body.classList.remove('menu-open');
+                // Hero background parallax
+                const heroBg = document.getElementById('parallax-bg');
+                if (heroBg) {
+                    const moveX = x * 0.5;
+                    const moveY = y * 0.5;
+                    heroBg.style.transform = `translate3d(${moveX}px, ${moveY}px, 0)`;
                 }
             });
+        } else {
+            // Mobile touch parallax
+            document.addEventListener('touchmove', (e) => {
+                const touch = e.touches[0];
+                const x = (touch.clientX / window.innerWidth - 0.5) * 10;
+                const y = (touch.clientY / window.innerHeight - 0.5) * 10;
 
-            // Close mobile menu when clicking on a link
-            const navLinks = document.querySelectorAll('nav ul li a');
-            navLinks.forEach(link => {
-                link.addEventListener('click', function() {
-                    if (navMenu.classList.contains('show')) {
-                        navMenu.classList.remove('show');
-                        mobileMenu.classList.remove('active');
-                        body.classList.remove('menu-open');
-                    }
+                document.querySelectorAll('.will-change').forEach(el => {
+                    el.style.transform = `perspective(500px) rotateX(${y}deg) rotateY(${x}deg)`;
                 });
+
+                // Hero background parallax
+                const heroBg = document.getElementById('parallax-bg');
+                if (heroBg) {
+                    const moveX = x * 0.3;
+                    const moveY = y * 0.3;
+                    heroBg.style.transform = `translate3d(${moveX}px, ${moveY}px, 0)`;
+                }
+            });
+        }
+
+        // Navigation scroll handling for mobile
+        document.addEventListener('DOMContentLoaded', function() {
+            // Remove mobile menu button since we always show horizontal nav
+            const mobileMenu = document.querySelector('.mobile-menu');
+            if (mobileMenu) {
+                mobileMenu.style.display = 'none';
+            }
+
+            // Make navigation scrollable with momentum
+            const navList = document.querySelector('nav ul');
+            if (navList) {
+                let isDown = false;
+                let startX;
+                let scrollLeft;
+
+                navList.addEventListener('mousedown', (e) => {
+                    isDown = true;
+                    startX = e.pageX - navList.offsetLeft;
+                    scrollLeft = navList.scrollLeft;
+                });
+
+                navList.addEventListener('mouseleave', () => {
+                    isDown = false;
+                });
+
+                navList.addEventListener('mouseup', () => {
+                    isDown = false;
+                });
+
+                navList.addEventListener('mousemove', (e) => {
+                    if (!isDown) return;
+                    e.preventDefault();
+                    const x = e.pageX - navList.offsetLeft;
+                    const walk = (x - startX) * 2;
+                    navList.scrollLeft = scrollLeft - walk;
+                });
+
+                // Touch events for mobile
+                navList.addEventListener('touchstart', (e) => {
+                    startX = e.touches[0].pageX - navList.offsetLeft;
+                    scrollLeft = navList.scrollLeft;
+                });
+
+                navList.addEventListener('touchmove', (e) => {
+                    e.preventDefault();
+                    const x = e.touches[0].pageX - navList.offsetLeft;
+                    const walk = (x - startX) * 2;
+                    navList.scrollLeft = scrollLeft - walk;
+                });
+            }
+
+            // Add scroll indicators for horizontal sections on mobile
+            const horizontalSections = document.querySelectorAll('.pricing-grid-3d, .product-grid-3d, .footer-content-4d');
+
+            horizontalSections.forEach(section => {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('scroll-hint');
+                        }
+                    });
+                }, { threshold: 0.1 });
+
+                observer.observe(section);
             });
 
             // Random glitch effect on navigation links
@@ -1454,10 +1693,10 @@
 
             // Device detection for performance optimization
             const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints;
-            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
             // Performance optimization based on device
-            if (isMobile || isTouchDevice) {
+            if (isMobileDevice || isTouchDevice) {
                 // Reduce animation intensity on mobile
                 document.querySelectorAll('*').forEach(el => {
                     if (el.style.animation) {
@@ -1488,6 +1727,15 @@
                         this.style.animation = '';
                     }, 500);
                 });
+
+                // Touch feedback for mobile
+                btn.addEventListener('touchstart', function() {
+                    this.style.transform = 'scale(0.95)';
+                });
+
+                btn.addEventListener('touchend', function() {
+                    this.style.transform = '';
+                });
             });
 
             // Random background glitch effect
@@ -1499,6 +1747,31 @@
                     }, 300);
                 }
             }, 10000);
+
+            // Prevent zoom on double tap
+            let lastTouchEnd = 0;
+            document.addEventListener('touchend', function (event) {
+                const now = (new Date()).getTime();
+                if (now - lastTouchEnd <= 300) {
+                    event.preventDefault();
+                }
+                lastTouchEnd = now;
+            }, false);
+
+            // Handle scroll to show/hide scroll indicators
+            let scrollTimeout;
+            window.addEventListener('scroll', () => {
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                    const sections = document.querySelectorAll('.scroll-hint');
+                    sections.forEach(section => {
+                        const rect = section.getBoundingClientRect();
+                        if (rect.left >= 0 && rect.right <= window.innerWidth) {
+                            section.classList.remove('scroll-hint');
+                        }
+                    });
+                }, 1000);
+            });
         });
 
         // Smooth scrolling for navigation links
@@ -1516,6 +1789,60 @@
                         behavior: 'smooth'
                     });
                 }
+            });
+        });
+
+        // Add momentum scrolling to horizontal containers
+        function addMomentumScroll(element) {
+            let startX;
+            let scrollLeft;
+            let velocity = 0;
+            let animationFrame;
+            let lastTime = 0;
+
+            element.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].pageX - element.offsetLeft;
+                scrollLeft = element.scrollLeft;
+                velocity = 0;
+                if (animationFrame) {
+                    cancelAnimationFrame(animationFrame);
+                }
+            });
+
+            element.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+                const x = e.touches[0].pageX - element.offsetLeft;
+                const walk = (x - startX) * 2;
+                element.scrollLeft = scrollLeft - walk;
+
+                // Calculate velocity
+                const currentTime = Date.now();
+                if (lastTime) {
+                    const deltaTime = currentTime - lastTime;
+                    const deltaScroll = walk;
+                    velocity = deltaScroll / deltaTime;
+                }
+                lastTime = currentTime;
+            });
+
+            element.addEventListener('touchend', () => {
+                // Apply momentum
+                const applyMomentum = () => {
+                    if (Math.abs(velocity) > 0.1) {
+                        element.scrollLeft -= velocity * 10;
+                        velocity *= 0.95; // friction
+                        animationFrame = requestAnimationFrame(applyMomentum);
+                    }
+                };
+                applyMomentum();
+            });
+        }
+
+        // Initialize momentum scrolling for all horizontal containers
+        document.addEventListener('DOMContentLoaded', () => {
+            const horizontalContainers = document.querySelectorAll('.pricing-grid-3d, .product-grid-3d, .footer-content-4d');
+            horizontalContainers.forEach(container => {
+                addMomentumScroll(container);
             });
         });
     </script>
