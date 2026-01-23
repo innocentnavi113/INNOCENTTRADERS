@@ -2,2052 +2,528 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>🔥 NAVIGATOR V2 | Quantum Forex Automation | 98% Win Rate</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NAVI v3 - Expert Advisor</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        /* ===== CSS RESET & VARIABLES ===== */
-        :root {
-            --primary-green: #00ff88;
-            --dark-green: #00cc66;
-            --primary-blue: #0066ff;
-            --light-blue: #00a3ff;
-            --neon-purple: #9d00ff;
-            --discount-red: #ff3366;
-            --warning-yellow: #ffcc00;
-            --black: #000000;
-            --darker-black: #0a0a0a;
-            --dark-gray: #111111;
-            --medium-gray: #222222;
-            --light-gray: #444444;
-            --white: #ffffff;
-            --off-white: #f8f8f8;
-            --profit-green: #00ff88;
-            --loss-red: #ff3366;
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        html {
-            -webkit-text-size-adjust: 100%;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            scroll-behavior: smooth;
         }
 
         body {
-            background-color: var(--darker-black);
-            color: var(--off-white);
+            font-family: 'Open Sans', sans-serif;
             line-height: 1.6;
+            color: #fff;
             overflow-x: hidden;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 500;
-            min-height: 100vh;
-            -webkit-font-smoothing: antialiased;
-            text-rendering: optimizeLegibility;
+            background-color: #000;
         }
 
-        /* ===== LIVE MARKET PRICES SECTION ===== */
-        .live-market-section {
-            background: var(--dark-gray);
-            padding: 60px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .market-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .market-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .market-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
-            color: var(--white);
-            font-weight: 800;
-        }
-
-        .market-refresh {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .refresh-btn {
-            background: rgba(0, 255, 136, 0.1);
-            border: 2px solid var(--primary-green);
-            color: var(--primary-green);
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .refresh-btn:hover {
-            background: var(--primary-green);
-            color: var(--black);
-        }
-
-        .last-updated {
-            font-size: 0.8rem;
-            color: #aaaaaa;
-        }
-
-        .market-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-
-        .market-card {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 10px;
-            padding: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .market-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(0, 255, 136, 0.3);
-            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.1);
-        }
-
-        .market-card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .market-symbol {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--white);
-        }
-
-        .market-change {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 700;
-            padding: 5px 15px;
-            border-radius: 20px;
-            display: inline-block;
-        }
-
-        .market-change.positive {
-            background: rgba(0, 255, 136, 0.1);
-            color: var(--profit-green);
-            border: 1px solid rgba(0, 255, 136, 0.3);
-        }
-
-        .market-change.negative {
-            background: rgba(255, 51, 102, 0.1);
-            color: var(--loss-red);
-            border: 1px solid rgba(255, 51, 102, 0.3);
-        }
-
-        .market-price {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--white);
-            margin-bottom: 10px;
-            font-family: 'Orbitron', sans-serif;
-        }
-
-        .market-info {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .info-item {
-            text-align: center;
-        }
-
-        .info-label {
-            font-size: 0.8rem;
-            color: #aaaaaa;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 5px;
-        }
-
-        .info-value {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--white);
-        }
-
-        /* Chart Container */
-        .chart-container {
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 10px;
-            padding: 20px;
-            margin-top: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            height: 400px;
-        }
-
-        .chart-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
-            color: var(--white);
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        #priceChart {
+        .background-container {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 350px;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.95)), url('https://image2url.com/r2/default/images/1769177459424-f4f20b23-348f-4876-b866-daa072c36eff.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
         }
 
-        /* Trading View Widget */
-        .tradingview-widget {
-            margin-top: 40px;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        /* Market Stats */
-        .market-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        .stat-card {
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 10px;
-            padding: 20px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .stat-value {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--primary-green);
-            margin-bottom: 10px;
-            font-family: 'Orbitron', sans-serif;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            color: #aaaaaa;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Loading States */
-        .loading {
-            opacity: 0.7;
-        }
-
-        .loading::after {
-            content: '';
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--primary-green);
-            border-top-color: transparent;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-left: 10px;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .error-message {
-            background: rgba(255, 51, 102, 0.1);
-            border: 1px solid rgba(255, 51, 102, 0.3);
-            color: var(--loss-red);
-            padding: 15px;
-            border-radius: 5px;
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        /* ===== REST OF YOUR EXISTING STYLES ===== */
-        /* ===== REUSABLE COMPONENTS ===== */
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
 
-        .section {
+        /* Header Styles */
+        header {
+            padding: 30px 0;
+            position: relative;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #ff0000, #990000);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 800;
+            color: white;
+        }
+
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 28px;
+            background: linear-gradient(135deg, #ff0000, #990000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-subtitle {
+            font-size: 12px;
+            letter-spacing: 2px;
+            color: #cccccc;
+            margin-top: -5px;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 0 100px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: #ffffff;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            color: #cccccc;
+        }
+
+        .highlight {
+            color: #ff0000;
+            font-weight: 600;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff0000, #990000);
+            color: white;
+            padding: 18px 40px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(255, 0, 0, 0.2);
+            margin-top: 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(255, 0, 0, 0.3);
+            background: linear-gradient(135deg, #cc0000, #770000);
+        }
+
+        /* Features Section */
+        .features {
             padding: 80px 0;
         }
 
         .section-title {
             text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
             margin-bottom: 50px;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--white);
-            margin-bottom: 15px;
-            font-weight: 800;
-        }
-
-        .section-title p {
-            font-size: 1.1rem;
-            color: #aaaaaa;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .btn {
-            display: inline-block;
-            background: linear-gradient(90deg, var(--primary-green), var(--primary-blue));
-            color: var(--white);
-            padding: 15px 35px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-family: 'Orbitron', sans-serif;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0, 255, 136, 0.3);
-        }
-
-        .btn-block {
-            display: block;
-            width: 100%;
-        }
-
-        /* ===== HERO SECTION ===== */
-        .hero-banner {
-            background: linear-gradient(135deg, #0a0a0a 0%, #111111 100%);
-            padding: 100px 0 60px;
-            text-align: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .hero-title {
-            font-size: 3.5rem;
-            color: var(--white);
-            margin-bottom: 20px;
-            font-weight: 900;
-            line-height: 1.2;
-        }
-
-        .hero-subtitle {
-            font-size: 1.3rem;
-            color: #cccccc;
-            margin-bottom: 30px;
-            font-weight: 500;
-        }
-
-        /* ===== LIMITED TIME BOX ===== */
-        .limited-time-box {
-            position: fixed;
-            top: 80px;
-            right: 20px;
-            background: linear-gradient(135deg, var(--discount-red), #ff6600);
-            color: white;
-            padding: 15px 20px;
-            border-radius: 10px;
-            z-index: 1000;
-            animation: floatAnimation 3s ease-in-out infinite;
-            border: 2px solid white;
-            box-shadow: 0 5px 20px rgba(255, 51, 102, 0.4);
-            max-width: 280px;
-        }
-
-        @keyframes floatAnimation {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .limited-time-content {
-            text-align: center;
-        }
-
-        .limited-time-title {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 800;
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-        }
-
-        .limited-time-countdown {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin-bottom: 8px;
-        }
-
-        .countdown-item {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 5px 10px;
-            border-radius: 5px;
-            min-width: 50px;
-        }
-
-        .countdown-number {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 800;
-            font-size: 1.3rem;
-        }
-
-        .countdown-label {
-            font-size: 0.7rem;
-            opacity: 0.9;
-        }
-
-        .limited-time-offer {
-            font-weight: 700;
-            font-size: 0.9rem;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 5px 10px;
-            border-radius: 5px;
-            display: inline-block;
-        }
-
-        /* ===== SOCIAL MEDIA BUTTONS ===== */
-        .social-buttons {
-            position: fixed;
-            bottom: 100px;
-            right: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            z-index: 999;
-        }
-
-        .social-btn {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.3rem;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        .social-btn:hover {
-            transform: translateY(-5px) scale(1.1);
-        }
-
-        .whatsapp-btn {
-            background: linear-gradient(135deg, #25D366, #128C7E);
-        }
-
-        .instagram-btn {
-            background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
-        }
-
-        .tiktok-btn {
-            background: linear-gradient(135deg, #000000, #25F4EE, #FE2C55);
-        }
-
-        /* ===== LIVE RESULTS SECTION ===== */
-        .live-results-section {
-            background: var(--dark-gray);
-            padding: 60px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .results-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
-        }
-
-        .result-card {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 10px;
-            padding: 25px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
-        }
-
-        .result-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(0, 255, 136, 0.3);
-        }
-
-        .result-icon {
-            font-size: 2.5rem;
-            color: var(--primary-green);
-            margin-bottom: 15px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .result-value {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--primary-green);
-            margin-bottom: 10px;
-            font-family: 'Orbitron', sans-serif;
-        }
-
-        .result-label {
-            font-size: 0.9rem;
-            color: #aaaaaa;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 600;
-        }
-
-        .live-ticker {
-            background: rgba(0, 255, 136, 0.1);
-            border-radius: 10px;
-            padding: 15px 25px;
-            display: inline-flex;
-            align-items: center;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .live-badge {
-            background: var(--discount-red);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            animation: pulse 1.5s infinite;
-        }
-
-        .ticker-pair {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            font-size: 1.2rem;
-        }
-
-        .ticker-change {
-            color: var(--primary-green);
-            font-weight: 700;
-        }
-
-        /* ===== PRICING SECTION ===== */
-        .pricing-section {
-            background: var(--darker-black);
-            padding: 80px 0;
-        }
-
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .pricing-card {
-            background: var(--dark-gray);
-            border-radius: 15px;
-            padding: 40px 30px;
-            text-align: center;
-            border: 2px solid rgba(255, 255, 255, 0.05);
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .pricing-card.featured {
-            border-color: var(--primary-green);
-            transform: translateY(-10px);
-        }
-
-        .pricing-card.featured::before {
-            content: 'Most Popular';
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--primary-green);
-            color: var(--black);
-            padding: 5px 20px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .pricing-card:hover {
-            border-color: rgba(0, 255, 136, 0.5);
-        }
-
-        .pricing-header {
-            margin-bottom: 30px;
-        }
-
-        .pricing-title {
-            font-size: 1.5rem;
-            color: var(--white);
-            margin-bottom: 15px;
-            font-weight: 700;
-        }
-
-        .pricing-subtitle {
-            color: #aaaaaa;
-            font-size: 0.9rem;
-        }
-
-        .price {
-            font-size: 3rem;
-            font-weight: 800;
-            color: var(--white);
-            margin-bottom: 5px;
-            font-family: 'Orbitron', sans-serif;
-        }
-
-        .price-period {
-            color: #aaaaaa;
-            font-size: 0.9rem;
-            margin-bottom: 25px;
-        }
-
-        .price-strikethrough {
-            text-decoration: line-through;
-            color: #666666;
-            font-size: 1.5rem;
-            margin-right: 10px;
-        }
-
-        .features-list {
-            list-style: none;
-            margin: 30px 0;
-            text-align: left;
-        }
-
-        .features-list li {
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            color: #cccccc;
-            font-size: 0.95rem;
-            position: relative;
-            padding-left: 30px;
-        }
-
-        .features-list li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--primary-green);
-            font-weight: 700;
-        }
-
-        .pricing-note {
-            background: rgba(0, 255, 136, 0.05);
-            border-radius: 8px;
-            padding: 15px;
-            margin: 25px 0;
-            text-align: center;
-            font-size: 0.9rem;
-            color: #aaaaaa;
-            border: 1px solid rgba(0, 255, 136, 0.1);
-        }
-
-        /* ===== FEATURES SECTION ===== */
-        .features-section {
-            background: var(--dark-gray);
-            padding: 80px 0;
+            color: #ffffff;
         }
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
-            margin-top: 40px;
         }
 
         .feature-card {
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 10px;
+            background: rgba(40, 40, 40, 0.9);
+            border-radius: 15px;
             padding: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
             text-align: center;
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(255, 0, 0, 0.2);
         }
 
         .feature-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(0, 102, 255, 0.3);
+            transform: translateY(-10px);
+            border-color: rgba(255, 0, 0, 0.5);
+            box-shadow: 0 10px 20px rgba(255, 0, 0, 0.1);
         }
 
         .feature-icon {
-            font-size: 2.5rem;
-            color: var(--primary-blue);
-            margin-bottom: 20px;
-            height: 60px;
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 25px;
+            background: rgba(255, 0, 0, 0.1);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 28px;
+            color: #ff0000;
         }
 
-        .feature-title {
-            font-size: 1.2rem;
-            color: var(--white);
+        .feature-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
             margin-bottom: 15px;
-            font-weight: 700;
+            color: #ffffff;
         }
 
-        /* ===== HOW IT WORKS SECTION ===== */
-        .how-it-works {
-            background: var(--darker-black);
-            padding: 80px 0;
+        .feature-card p {
+            color: #cccccc;
         }
 
-        .steps-container {
+        /* Links Section */
+        .links-section {
+            padding: 80px 0 100px;
+        }
+
+        .links-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
             margin-top: 40px;
         }
 
-        .step-card {
-            text-align: center;
-            padding: 30px;
-        }
-
-        .step-number {
-            display: inline-block;
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
-            color: white;
-            border-radius: 50%;
-            line-height: 50px;
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            font-family: 'Orbitron', sans-serif;
-        }
-
-        .step-title {
-            font-size: 1.3rem;
-            color: var(--white);
-            margin-bottom: 15px;
-            font-weight: 700;
-        }
-
-        /* ===== VERTICAL ANALYTICS SECTION ===== */
-        .analytics-section {
-            background: var(--dark-gray);
-            padding: 80px 0;
-        }
-
-        .analytics-container {
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .analytics-card {
-            background: rgba(255, 255, 255, 0.02);
+        .link-card {
+            background: rgba(40, 40, 40, 0.9);
             border-radius: 15px;
-            padding: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .analytics-card h3 {
-            font-size: 1.8rem;
-            color: var(--white);
-            margin-bottom: 25px;
-            font-weight: 800;
-            text-align: center;
-        }
-
-        /* Advanced Performance Analytics - Vertical Layout */
-        .performance-analytics {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-        }
-
-        .performance-stats {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .performance-stat {
-            background: rgba(0, 255, 136, 0.05);
-            border-radius: 10px;
             padding: 25px;
             text-align: center;
-            border: 1px solid rgba(0, 255, 136, 0.1);
-        }
-
-        .performance-value {
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: var(--primary-green);
-            margin-bottom: 10px;
-            font-family: 'Orbitron', sans-serif;
-        }
-
-        .performance-label {
-            font-size: 0.9rem;
-            color: #aaaaaa;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 600;
-        }
-
-        /* Real-Time Market Intelligence - Vertical Layout */
-        .market-intelligence {
             display: flex;
             flex-direction: column;
-            gap: 30px;
-        }
-
-        .market-features {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .market-feature {
-            background: rgba(0, 102, 255, 0.05);
-            border-radius: 10px;
-            padding: 25px;
-            text-align: center;
-            border: 1px solid rgba(0, 102, 255, 0.1);
-        }
-
-        .feature-value {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--primary-blue);
-            margin-bottom: 10px;
-            font-family: 'Orbitron', sans-serif;
-        }
-
-        /* ===== MARKET DATA SECTION (Old) ===== */
-        .market-data-section {
-            background: var(--darker-black);
-            padding: 60px 0;
-            display: none; /* Hide old market data section */
-        }
-
-        .market-pairs {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 30px;
-        }
-
-        .market-pair {
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 8px;
-            padding: 15px;
-            display: flex;
-            justify-content: space-between;
             align-items: center;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-decoration: none;
+            color: white;
         }
 
-        .pair-name {
-            font-weight: 600;
-            font-size: 1rem;
+        .link-card:hover {
+            background: rgba(60, 60, 60, 0.9);
+            border-color: rgba(255, 0, 0, 0.5);
+            transform: translateY(-5px);
         }
 
-        .pair-price {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 600;
+        .link-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #ff0000;
+            margin-bottom: 20px;
         }
 
-        .pair-change {
-            font-weight: 700;
+        .link-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        .link-card p {
+            color: #cccccc;
             font-size: 0.9rem;
         }
 
-        .positive {
-            color: var(--profit-green);
-        }
-
-        .negative {
-            color: var(--loss-red);
-        }
-
-        /* ===== FINAL CTA SECTION ===== */
-        .final-cta {
-            background: linear-gradient(135deg, #0a0a0a 0%, #111111 100%);
-            padding: 80px 0;
+        /* Footer */
+        footer {
+            padding: 40px 0;
             text-align: center;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 50px;
         }
 
-        .cta-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 20px;
+        .footer-text {
+            color: #999999;
+            font-size: 0.9rem;
         }
 
-        .cta-title {
-            font-size: 2.5rem;
-            color: var(--white);
-            margin-bottom: 20px;
-            font-weight: 800;
-        }
-
-        .cta-subtitle {
-            font-size: 1.1rem;
-            color: #cccccc;
-            margin-bottom: 30px;
-        }
-
-        .benefits-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        .social-links {
+            display: flex;
+            justify-content: center;
             gap: 20px;
-            margin: 40px 0;
+            margin-top: 20px;
         }
 
-        .benefit-item {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            color: #aaaaaa;
-            font-size: 0.9rem;
-        }
-
-        .benefit-icon {
-            color: var(--primary-green);
-            font-size: 1.2rem;
-        }
-
-        /* ===== HEADER ===== */
-        .main-header {
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(10px);
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 15px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .header-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--white);
-            text-decoration: none;
-        }
-
-        .logo span {
-            color: var(--primary-green);
-        }
-
-        .main-nav ul {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-        }
-
-        .main-nav a {
-            color: #cccccc;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: color 0.3s ease;
-            padding: 8px 15px;
-            border-radius: 5px;
-        }
-
-        .main-nav a:hover {
-            color: var(--primary-green);
-            background: rgba(0, 255, 136, 0.1);
-        }
-
-        /* ===== BROKER BUTTON ===== */
-        .broker-button {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 999;
-        }
-
-        .broker-btn {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, var(--primary-green), var(--primary-blue));
+        .social-icon {
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ff0000;
             text-decoration: none;
-            color: white;
-            font-weight: 700;
-            font-size: 0.7rem;
-            text-align: center;
-            box-shadow: 0 5px 20px rgba(0, 255, 136, 0.3);
             transition: all 0.3s ease;
         }
 
-        .broker-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 25px rgba(0, 255, 136, 0.5);
+        .social-icon:hover {
+            background: rgba(255, 0, 0, 0.2);
+            transform: translateY(-3px);
         }
 
-        .broker-icon {
-            font-size: 1.5rem;
-            margin-bottom: 5px;
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+                padding: 0 15px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .features, .links-section {
+                padding: 50px 0;
+            }
         }
 
-        /* ===== ANIMATIONS ===== */
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .cta-button {
+                padding: 15px 30px;
+                font-size: 16px;
+            }
+
+            .feature-card, .link-card {
+                padding: 20px;
+            }
         }
 
+        /* Animation */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .fade-in {
-            animation: fadeIn 0.6s ease forwards;
+            animation: fadeIn 0.8s ease forwards;
         }
 
-        /* ===== RESPONSIVE DESIGN ===== */
-        @media (max-width: 1024px) {
-            .limited-time-box {
-                display: none;
-            }
+        .delay-1 { animation-delay: 0.2s; opacity: 0; }
+        .delay-2 { animation-delay: 0.4s; opacity: 0; }
+        .delay-3 { animation-delay: 0.6s; opacity: 0; }
 
-            .social-buttons {
-                bottom: 80px;
-            }
-
-            .market-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        /* Red accent elements */
+        .accent-red {
+            color: #ff0000;
         }
 
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.5rem;
-            }
-
-            .section-title h2 {
-                font-size: 2rem;
-            }
-
-            .pricing-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .main-nav ul {
-                gap: 15px;
-            }
-
-            .main-nav a {
-                font-size: 0.8rem;
-                padding: 6px 12px;
-            }
-
-            .performance-stats,
-            .market-features {
-                grid-template-columns: 1fr;
-            }
-
-            .analytics-card {
-                padding: 25px;
-            }
-
-            .broker-button {
-                bottom: 20px;
-                right: 20px;
-            }
-
-            .broker-btn {
-                width: 60px;
-                height: 60px;
-                font-size: 0.6rem;
-            }
-
-            .broker-icon {
-                font-size: 1.3rem;
-            }
-
-            .market-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .market-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
+        .border-red {
+            border-color: rgba(255, 0, 0, 0.3) !important;
         }
 
-        @media (max-width: 480px) {
-            .hero-title {
-                font-size: 2rem;
-            }
-
-            .section {
-                padding: 60px 0;
-            }
-
-            .result-value {
-                font-size: 2rem;
-            }
-
-            .price {
-                font-size: 2.5rem;
-            }
-
-            .social-buttons {
-                bottom: 100px;
-                right: 15px;
-            }
-
-            .social-btn {
-                width: 45px;
-                height: 45px;
-                font-size: 1.1rem;
-            }
-
-            .market-price {
-                font-size: 2rem;
-            }
+        /* Stats section */
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            padding: 40px 0;
+            margin: 40px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* ===== UTILITY CLASSES ===== */
-        .text-center { text-align: center; }
-        .mt-20 { margin-top: 20px; }
-        .mt-30 { margin-top: 30px; }
-        .mt-40 { margin-top: 40px; }
-        .mb-20 { margin-bottom: 20px; }
-        .mb-30 { margin-bottom: 30px; }
-        .mb-40 { margin-bottom: 40px; }
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #ff0000;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .stat-label {
+            color: #cccccc;
+            font-size: 1rem;
+            margin-top: 5px;
+        }
     </style>
 </head>
 <body>
-    <!-- Limited Time Box -->
-    <div class="limited-time-box">
-        <div class="limited-time-content">
-            <div class="limited-time-title">OFFER ENDS IN:</div>
-            <div class="limited-time-countdown">
-                <div class="countdown-item">
-                    <div class="countdown-number" id="countdown-days">05</div>
-                    <div class="countdown-label">DAYS</div>
-                </div>
-                <div class="countdown-item">
-                    <div class="countdown-number" id="countdown-hours">18</div>
-                    <div class="countdown-label">HRS</div>
-                </div>
-                <div class="countdown-item">
-                    <div class="countdown-number" id="countdown-minutes">42</div>
-                    <div class="countdown-label">MINS</div>
-                </div>
-            </div>
-            <div class="limited-time-offer">GET 60% OFF NOW!</div>
-        </div>
-    </div>
-
-    <!-- Social Media Buttons -->
-    <div class="social-buttons">
-        <a href="https://wa.me/27813884972" class="social-btn whatsapp-btn" title="WhatsApp">
-            <i class="fab fa-whatsapp"></i>
-        </a>
-        <a href="https://instagram.com/_innocent_za" class="social-btn instagram-btn" title="Instagram">
-            <i class="fab fa-instagram"></i>
-        </a>
-        <a href="https://tiktok.com/@_innocent_za" class="social-btn tiktok-btn" title="TikTok">
-            <i class="fab fa-tiktok"></i>
-        </a>
-    </div>
+    <!-- Background Image -->
+    <div class="background-container"></div>
 
     <!-- Header -->
-    <header class="main-header">
-        <div class="header-container">
-            <a href="#home" class="logo">NAVIGATOR<span>V2</span></a>
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="#home" class="nav-link">Home</a></li>
-                    <li><a href="#results" class="nav-link">Results</a></li>
-                    <li><a href="#live-market" class="nav-link">Live Market</a></li>
-                    <li><a href="#pricing" class="nav-link">Pricing</a></li>
-                    <li><a href="#features" class="nav-link">Features</a></li>
-                    <li><a href="#how" class="nav-link">How It Works</a></li>
-                </ul>
-            </nav>
+    <header class="container">
+        <div class="logo">
+            <div class="logo-icon">N3</div>
+            <div>
+                <div class="logo-text">NAVI v3</div>
+                <div class="logo-subtitle">EXPERT ADVISOR</div>
+            </div>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="hero-banner" id="home">
-        <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-title">Never Traded Before?<br>No Problem! Start Earning Today</h1>
-                <p class="hero-subtitle">Advanced NAVIGATOR that trades 24/7, analyzing market patterns and executing profitable trades while you sleep. Join thousands of successful traders.</p>
-                <a href="#pricing" class="btn">Get Started Now</a>
-
-                <div class="live-ticker">
-                    <span class="live-badge">LIVE</span>
-                    <span class="ticker-pair">XAUUSD</span>
-                    <span class="ticker-change" id="hero-ticker-change">+2.45%</span>
-                </div>
-            </div>
-        </div>
+    <section class="hero container fade-in">
+        <h1>Advanced Algorithmic Trading with <span class="highlight">NAVI v3</span></h1>
+        <p>Revolutionize your trading experience with our cutting-edge Expert Advisor. NAVI v3 utilizes advanced algorithms to analyze market trends and execute trades with precision, maximizing your profitability.</p>
+        <a href="https://paystack.shop/pay/innocenttraders" class="cta-button" target="_blank">
+            <i class="fas fa-shopping-cart"></i> Purchase NAVI v3 Now
+        </a>
     </section>
 
-    <!-- Live Results Section -->
-    <section class="live-results-section" id="results">
-        <div class="container">
-            <div class="section-title">
-                <h2><i class="fas fa-robot"></i> Live NAVIGATOR Trading Results</h2>
-                <p>Real-time performance metrics from our AI trading system</p>
-            </div>
-
-            <div class="results-container">
-                <div class="result-card fade-in">
-                    <div class="result-icon"><i class="fas fa-chart-line"></i></div>
-                    <div class="result-value">90%</div>
-                    <div class="result-label">Success Rate</div>
-                </div>
-                <div class="result-card fade-in">
-                    <div class="result-icon"><i class="fas fa-clock"></i></div>
-                    <div class="result-value">24/7</div>
-                    <div class="result-label">Active Trading</div>
-                </div>
-                <div class="result-card fade-in">
-                    <div class="result-icon"><i class="fas fa-users"></i></div>
-                    <div class="result-value">100+</div>
-                    <div class="result-label">Users</div>
-                </div>
-                <div class="result-card fade-in">
-                    <div class="result-icon"><i class="fas fa-bolt"></i></div>
-                    <div class="result-value">&lt;1ms</div>
-                    <div class="result-label">Execution Speed</div>
-                </div>
-            </div>
-
-            <div class="text-center mt-40">
-                <p class="result-label">Smart Analysis • Instant Execution • Risk Management</p>
-            </div>
+    <!-- Stats Section -->
+    <section class="container stats fade-in">
+        <div class="stat-item">
+            <div class="stat-number">98%</div>
+            <div class="stat-label">Win Rate</div>
         </div>
-    </section>
-
-    <!-- Live JustMarkets Market Prices Section -->
-    <section class="live-market-section" id="live-market">
-        <div class="market-container">
-            <div class="market-header">
-                <h2 class="market-title"><i class="fas fa-chart-line"></i> Live JustMarkets Market Prices</h2>
-                <div class="market-refresh">
-                    <button class="refresh-btn" id="refreshMarketData">
-                        <i class="fas fa-sync-alt"></i> Refresh
-                    </button>
-                    <div class="last-updated" id="lastUpdated">
-                        Last updated: <span id="updateTime">Just now</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Market Grid -->
-            <div class="market-grid" id="marketGrid">
-                <!-- Market cards will be dynamically inserted here -->
-                <div class="market-card loading">
-                    <div class="market-card-header">
-                        <div class="market-symbol">Loading...</div>
-                        <div class="market-change positive">+0.00%</div>
-                    </div>
-                    <div class="market-price">$0.0000</div>
-                    <div class="market-info">
-                        <div class="info-item">
-                            <div class="info-label">High</div>
-                            <div class="info-value">$0.0000</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label">Low</div>
-                            <div class="info-value">$0.0000</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label">Volume</div>
-                            <div class="info-value">0.0M</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Market Statistics -->
-            <div class="market-stats">
-                <div class="stat-card">
-                    <div class="stat-value" id="totalPairs">0</div>
-                    <div class="stat-label">Trading Pairs</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value" id="activeMarkets">0</div>
-                    <div class="stat-label">Active Markets</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value" id="totalVolume">$0.0M</div>
-                    <div class="stat-label">24h Volume</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value" id="marketChange">+0.00%</div>
-                    <div class="stat-label">Market Change</div>
-                </div>
-            </div>
-
-            <!-- TradingView Widget Container -->
-            <div class="tradingview-widget">
-                <!-- TradingView Widget BEGIN -->
-                <div class="tradingview-widget-container">
-                    <div id="tradingview_chart" style="height: 500px;"></div>
-                    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-                    <script type="text/javascript">
-                        new TradingView.widget({
-                            "width": "100%",
-                            "height": "500",
-                            "symbol": "FX:EURUSD",
-                            "interval": "5",
-                            "timezone": "Etc/UTC",
-                            "theme": "dark",
-                            "style": "1",
-                            "locale": "en",
-                            "toolbar_bg": "#f1f3f6",
-                            "enable_publishing": false,
-                            "hide_side_toolbar": false,
-                            "allow_symbol_change": true,
-                            "container_id": "tradingview_chart"
-                        });
-                    </script>
-                </div>
-                <!-- TradingView Widget END -->
-            </div>
+        <div class="stat-item">
+            <div class="stat-number">24/7</div>
+            <div class="stat-label">Market Monitoring</div>
         </div>
-    </section>
-
-    <!-- Pricing Section -->
-    <section class="pricing-section" id="pricing">
-        <div class="container">
-            <div class="section-title">
-                <h2><i class="fas fa-shopping-cart"></i> Choose Your NAVIGATOR V2</h2>
-                <p>One-time payment. Lifetime access. Start making profits today with our advanced NAVIGATOR trading system.</p>
-            </div>
-
-            <div class="pricing-grid">
-                <!-- Mobile Edition -->
-                <div class="pricing-card">
-                    <div class="pricing-header">
-                        <h3 class="pricing-title"><i class="fas fa-mobile-alt"></i> Mobile Robot</h3>
-                        <p class="pricing-subtitle">Perfect for mobile trading on the go</p>
-                        <div class="price">
-                            <span class="price-strikethrough">$60</span>$24
-                        </div>
-                        <div class="price-period">once-off</div>
-                    </div>
-
-                    <ul class="features-list">
-                        <li>Mobile app access</li>
-                        <li>Real-time notifications</li>
-                        <li>Basic AI algorithms</li>
-                        <li>24/7 automated trading</li>
-                        <li>Risk management tools</li>
-                        <li>Personal mentor support</li>
-                    </ul>
-
-                    <a href="https://paystack.shop/pay/innocenttraders" class="btn btn-block">Get Mobile Edition</a>
-                </div>
-
-                <!-- PC Edition (Featured) -->
-                <div class="pricing-card featured">
-                    <div class="pricing-header">
-                        <h3 class="pricing-title"><i class="fas fa-desktop"></i> PC Robot</h3>
-                        <p class="pricing-subtitle">Advanced trading solution for desktop</p>
-                        <div class="price">
-                            <span class="price-strikethrough">$120</span>$90
-                        </div>
-                        <div class="price-period">once-off</div>
-                    </div>
-
-                    <ul class="features-list">
-                        <li>Full desktop application</li>
-                        <li>Advanced AI algorithms</li>
-                        <li>Multiple trading pairs</li>
-                        <li>Advanced analytics dashboard</li>
-                        <li>Priority support</li>
-                        <li>Personal mentor support</li>
-                        <li>Custom strategies</li>
-                        <li>Risk optimization</li>
-                    </ul>
-
-                    <a href="https://paystack.shop/pay/innocenttraders" class="btn btn-block">Get PC Edition</a>
-                </div>
-
-                <!-- Omega Bundle -->
-                <div class="pricing-card">
-                    <div class="pricing-header">
-                        <h3 class="pricing-title"><i class="fas fa-crown"></i> Omega Bundle</h3>
-                        <p class="pricing-subtitle">Complete trading solution for professionals</p>
-                        <div class="price">$139</div>
-                        <div class="price-period">once-off</div>
-                    </div>
-
-                    <ul class="features-list">
-                        <li>Both Mobile & PC versions</li>
-                        <li>Quantum sync across devices</li>
-                        <li>Dedicated account manager</li>
-                        <li>Lifetime updates & premium support</li>
-                        <li>24/7 phone & WhatsApp support</li>
-                        <li>Complete quantum strategy library</li>
-                        <li>Custom strategy development</li>
-                        <li>1-on-1 training sessions</li>
-                    </ul>
-
-                    <a href="https://paystack.shop/pay/innocenttraders" class="btn btn-block">Get Omega Bundle</a>
-                </div>
-            </div>
-
-            <div class="pricing-note">
-                <i class="fas fa-check-circle"></i> Lifetime access • <i class="fas fa-check-circle"></i> No monthly fees • <i class="fas fa-check-circle"></i> Personal mentor included • <i class="fas fa-check-circle"></i> 24/7 support<br>
-                <i class="fas fa-envelope"></i> Instant Delivery: After purchase confirmation, your license key will be automatically sent to your email.
-            </div>
-
-            <div class="text-center mt-30">
-                <p class="result-label"><i class="fas fa-exclamation-triangle"></i> Risk Warning: Trading involves risk. Past performance is not indicative of future results.</p>
-            </div>
+        <div class="stat-item">
+            <div class="stat-number">1.5</div>
+            <div class="stat-label">Risk/Reward Ratio</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">1000+</div>
+            <div class="stat-label">Active Users</div>
         </div>
     </section>
 
     <!-- Features Section -->
-    <section class="features-section" id="features">
-        <div class="container">
-            <div class="section-title">
-                <h2><i class="fas fa-star"></i> Advanced Quantum Features</h2>
-                <p>Our AI-powered trading system combines cutting-edge technology with proven trading strategies</p>
+    <section class="features container">
+        <h2 class="section-title fade-in">Why Choose <span class="accent-red">NAVI v3</span>?</h2>
+        <div class="features-grid">
+            <div class="feature-card fade-in delay-1">
+                <div class="feature-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h3>Advanced Algorithms</h3>
+                <p>Powered by machine learning and sophisticated trading algorithms that adapt to market conditions in real-time.</p>
             </div>
 
-            <div class="features-grid">
-                <div class="feature-card fade-in">
-                    <div class="feature-icon"><i class="fas fa-brain"></i></div>
-                    <h3 class="feature-title">NAVIGATOR Algorithm</h3>
-                    <p>Our neural network analyzes thousands of market indicators in real-time to identify profitable opportunities.</p>
+            <div class="feature-card fade-in delay-2">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
                 </div>
+                <h3>High Accuracy</h3>
+                <p>Proven track record with high win rates across multiple currency pairs and timeframes.</p>
+            </div>
 
-                <div class="feature-card fade-in">
-                    <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
-                    <h3 class="feature-title">Market Analysis</h3>
-                    <p>Deep learning models process market sentiment, news, and technical patterns for optimal entry and exit points.</p>
+            <div class="feature-card fade-in delay-3">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
                 </div>
-
-                <div class="feature-card fade-in">
-                    <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
-                    <h3 class="feature-title">Risk Management</h3>
-                    <p>Built-in safety protocols and stop-loss mechanisms protect your capital from major market downturns.</p>
-                </div>
-
-                <div class="feature-card fade-in">
-                    <div class="feature-icon"><i class="fas fa-tachometer-alt"></i></div>
-                    <h3 class="feature-title">NAVIGATOR Execution</h3>
-                    <p>Execute trades in milliseconds with our high-frequency trading infrastructure and direct market access.</p>
-                </div>
-
-                <div class="feature-card fade-in">
-                    <div class="feature-icon"><i class="fas fa-search-dollar"></i></div>
-                    <h3 class="feature-title">Profit Optimization</h3>
-                    <p>Continuously optimizes trading strategies based on market conditions to maximize your returns.</p>
-                </div>
-
-                <div class="feature-card fade-in">
-                    <div class="feature-icon"><i class="fas fa-globe"></i></div>
-                    <h3 class="feature-title">24/7 Automation</h3>
-                    <p>Never miss an opportunity. Our AI works around the clock, even when global markets are active.</p>
-                </div>
+                <h3>Risk Management</h3>
+                <p>Built-in risk management systems protect your capital with stop-loss and take-profit strategies.</p>
             </div>
         </div>
     </section>
 
-    <!-- How It Works Section -->
-    <section class="how-it-works" id="how">
-        <div class="container">
-            <div class="section-title">
-                <h2><i class="fas fa-cogs"></i> How NAVIGATOR V2 Works</h2>
-                <p>Get started in just 3 simple steps. Pay once, get your license, and start automated trading immediately.</p>
-            </div>
-
-            <div class="steps-container">
-                <div class="step-card fade-in">
-                    <div class="step-number">1</div>
-                    <h3 class="step-title"><i class="fas fa-credit-card"></i> Pay Once-Off</h3>
-                    <p>Make a single payment for lifetime access to NAVIGATOR V2. No monthly fees or hidden charges.</p>
+    <!-- Links Section -->
+    <section class="links-section container">
+        <h2 class="section-title fade-in">Get Started with <span class="accent-red">NAVI v3</span></h2>
+        <div class="links-grid">
+            <a href="https://paystack.shop/pay/innocenttraders" class="link-card fade-in delay-1" target="_blank">
+                <div class="link-icon">
+                    <i class="fas fa-credit-card"></i>
                 </div>
+                <h3>Purchase License</h3>
+                <p>Secure payment via Paystack. Get your NAVI v3 license instantly after purchase.</p>
+            </a>
 
-                <div class="step-card fade-in">
-                    <div class="step-number">2</div>
-                    <h3 class="step-title"><i class="fas fa-key"></i> Receive License Key</h3>
-                    <p>Get your unique license key and activation instructions delivered instantly to your email.</p>
+            <a href="https://one.justmarkets.link/a/x6l8901l3i" class="link-card fade-in delay-2" target="_blank">
+                <div class="link-icon">
+                    <i class="fas fa-exchange-alt"></i>
                 </div>
+                <h3>Recommended Broker</h3>
+                <p>Open an account with our trusted broker partner for optimal performance.</p>
+            </a>
 
-                <div class="step-card fade-in">
-                    <div class="step-number">3</div>
-                    <h3 class="step-title"><i class="fas fa-play-circle"></i> Connect & Start Trading</h3>
-                    <p>Link your trading account, activate the robot with your license key, and watch it trade 24/7.</p>
+            <a href="https://www.instagram.com/_innocent_za/?__pwa=1" class="link-card fade-in delay-1" target="_blank">
+                <div class="link-icon">
+                    <i class="fab fa-instagram"></i>
                 </div>
-            </div>
+                <h3>Follow on Instagram</h3>
+                <p>Get the latest updates, trading insights, and community discussions.</p>
+            </a>
+
+            <a href="https://wa.me/27813884972" class="link-card fade-in delay-2" target="_blank">
+                <div class="link-icon">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+                <h3>WhatsApp Support</h3>
+                <p>Contact our support team for assistance with setup and technical questions.</p>
+            </a>
         </div>
     </section>
 
-    <!-- Analytics Section (Vertical Layout) -->
-    <section class="analytics-section">
-        <div class="container">
-            <div class="analytics-container">
-                <!-- Advanced Performance Analytics - Vertical -->
-                <div class="analytics-card fade-in">
-                    <h3><i class="fas fa-chart-bar"></i> Advanced Performance Analytics</h3>
-                    <div class="performance-analytics">
-                        <p>Get deep insights into your trading performance with our comprehensive analytics dashboard.</p>
-
-                        <div class="performance-stats">
-                            <div class="performance-stat">
-                                <div class="performance-icon"><i class="fas fa-bullseye"></i></div>
-                                <div class="performance-value">90.2%</div>
-                                <div class="performance-label">Accuracy Rate</div>
-                            </div>
-
-                            <div class="performance-stat">
-                                <div class="performance-icon"><i class="fas fa-arrow-up"></i></div>
-                                <div class="performance-value">2.8x</div>
-                                <div class="performance-label">Avg Return</div>
-                            </div>
-
-                            <div class="performance-stat">
-                                <div class="performance-icon"><i class="fas fa-eye"></i></div>
-                                <div class="performance-value">24/7</div>
-                                <div class="performance-label">Monitoring</div>
-                            </div>
-
-                            <div class="performance-stat">
-                                <div class="performance-icon"><i class="fas fa-smile"></i></div>
-                                <div class="performance-value">100+</div>
-                                <div class="performance-label">Happy Traders</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Real-Time Market Intelligence - Vertical -->
-                <div class="analytics-card fade-in">
-                    <h3><i class="fas fa-lightbulb"></i> Real-Time Market Intelligence</h3>
-                    <div class="market-intelligence">
-                        <p>Access live market data from global exchanges with instant analysis and real-time intelligence.</p>
-
-                        <div class="market-features">
-                            <div class="market-feature">
-                                <div class="feature-icon"><i class="fas fa-exchange-alt"></i></div>
-                                <div class="feature-value">100+</div>
-                                <div class="performance-label">Market Pairs</div>
-                            </div>
-
-                            <div class="market-feature">
-                                <div class="feature-icon"><i class="fas fa-rocket"></i></div>
-                                <div class="feature-value">&lt;1ms</div>
-                                <div class="performance-label">Data Latency</div>
-                            </div>
-
-                            <div class="market-feature">
-                                <div class="feature-icon"><i class="fas fa-server"></i></div>
-                                <div class="feature-value">90.2%</div>
-                                <div class="performance-label">Uptime</div>
-                            </div>
-
-                            <div class="market-feature">
-                                <div class="feature-icon"><i class="fas fa-desktop"></i></div>
-                                <div class="feature-value">24/7</div>
-                                <div class="performance-label">Monitoring</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- Footer -->
+    <footer class="container">
+        <div class="social-links">
+            <a href="https://www.instagram.com/_innocent_za/?__pwa=1" class="social-icon" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://wa.me/27813884972" class="social-icon" target="_blank">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="mailto:support@naviv3.com" class="social-icon">
+                <i class="fas fa-envelope"></i>
+            </a>
         </div>
-    </section>
-
-    <!-- Final CTA Section -->
-    <section class="final-cta">
-        <div class="container">
-            <div class="cta-container">
-                <h2 class="cta-title"><i class="fas fa-rocket"></i> Ready to Start Automated Trading?</h2>
-                <p class="cta-subtitle">Join thousands of successful traders who trust our AI to grow their wealth. Get your robot copy and start automated trading today.</p>
-
-                <div class="benefits-list">
-                    <div class="benefit-item">
-                        <span class="benefit-icon"><i class="fas fa-user-tie"></i></span>
-                        <span>Personal mentor support included</span>
-                    </div>
-                    <div class="benefit-item">
-                        <span class="benefit-icon"><i class="fas fa-ban"></i></span>
-                        <span>No monthly fees or hidden charges</span>
-                    </div>
-                    <div class="benefit-item">
-                        <span class="benefit-icon"><i class="fas fa-headset"></i></span>
-                        <span>24/7 customer support</span>
-                    </div>
-                    <div class="benefit-item">
-                        <span class="benefit-icon"><i class="fas fa-tools"></i></span>
-                        <span>Advanced risk management tools</span>
-                    </div>
-                </div>
-
-                <a href="https://paystack.shop/pay/innocenttraders" class="btn" style="padding: 20px 50px; font-size: 1.1rem;">
-                    <i class="fas fa-play"></i> Start Trading Now
-                </a>
-
-                <div class="mt-30">
-                    <p class="result-label"><i class="fas fa-exclamation-triangle"></i> Risk Warning: Trading involves risk. Past performance is not indicative of future results. Only invest what you can afford to lose.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Broker Button -->
-    <div class="broker-button">
-        <a href="https://one.justmarkets.link/a/x6l8901l3i" target="_blank" class="broker-btn">
-            <div class="broker-icon">💱</div>
-            <span>BROKER</span>
-        </a>
-    </div>
+        <p class="footer-text">© 2023 NAVI v3 Expert Advisor. All rights reserved.</p>
+        <p class="footer-text">Trading involves risk. Past performance is not indicative of future results.</p>
+    </footer>
 
     <script>
-        // ===== LIVE JUSTMARKETS MARKET PRICES API INTEGRATION =====
+        // Simple script to handle the fade-in animations on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
 
-        // Simulated JustMarkets API Data (Replace with actual API when available)
-        const justMarketsPairs = [
-            {
-                symbol: "EURUSD",
-                name: "Euro / US Dollar",
-                price: 1.0892,
-                change: 0.21,
-                high: 1.0915,
-                low: 1.0878,
-                volume: 152.4,
-                icon: "fas fa-euro-sign"
-            },
-            {
-                symbol: "GBPUSD",
-                name: "British Pound / US Dollar",
-                price: 1.2734,
-                change: -0.12,
-                high: 1.2756,
-                low: 1.2712,
-                volume: 98.7,
-                icon: "fas fa-pound-sign"
-            },
-            {
-                symbol: "USDJPY",
-                name: "US Dollar / Japanese Yen",
-                price: 148.92,
-                change: 0.23,
-                high: 149.15,
-                low: 148.65,
-                volume: 124.8,
-                icon: "fas fa-yen-sign"
-            },
-            {
-                symbol: "XAUUSD",
-                name: "Gold / US Dollar",
-                price: 2035.42,
-                change: 0.59,
-                high: 2040.15,
-                low: 2028.75,
-                volume: 45.3,
-                icon: "fas fa-gem"
-            },
-            {
-                symbol: "BTCUSD",
-                name: "Bitcoin / US Dollar",
-                price: 43250.85,
-                change: 2.10,
-                high: 43500.00,
-                low: 42800.00,
-                volume: 32.8,
-                icon: "fab fa-bitcoin"
-            },
-            {
-                symbol: "ETHUSD",
-                name: "Ethereum / US Dollar",
-                price: 2580.34,
-                change: -1.71,
-                high: 2620.45,
-                low: 2550.20,
-                volume: 28.9,
-                icon: "fab fa-ethereum"
-            },
-            {
-                symbol: "US30",
-                name: "Dow Jones Industrial Average",
-                price: 37542.15,
-                change: 0.85,
-                high: 37600.00,
-                low: 37400.00,
-                volume: 156.7,
-                icon: "fas fa-chart-line"
-            },
-            {
-                symbol: "NAS100",
-                name: "NASDAQ 100 Index",
-                price: 16542.83,
-                change: 1.25,
-                high: 16580.00,
-                low: 16450.00,
-                volume: 142.3,
-                icon: "fas fa-microchip"
-            }
-        ];
+            const fadeInOnScroll = function() {
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const elementVisible = 150;
 
-        // Function to update market data
-        function updateMarketData() {
-            const marketGrid = document.getElementById('marketGrid');
-            const updateTime = document.getElementById('updateTime');
-            const refreshBtn = document.getElementById('refreshMarketData');
-
-            // Add loading state
-            refreshBtn.classList.add('loading');
-            refreshBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Refreshing...';
-
-            // Simulate API call delay
-            setTimeout(() => {
-                // Clear existing content
-                marketGrid.innerHTML = '';
-
-                let totalVolume = 0;
-                let marketChangeSum = 0;
-                let activeMarkets = 0;
-
-                // Update each pair with simulated real-time changes
-                justMarketsPairs.forEach(pair => {
-                    // Simulate small price changes
-                    const randomChange = (Math.random() - 0.5) * 0.2;
-                    pair.price = pair.price * (1 + randomChange / 100);
-                    pair.change = pair.change + randomChange;
-
-                    // Update volume
-                    pair.volume = pair.volume * (1 + (Math.random() * 0.1 - 0.05));
-
-                    // Create market card
-                    const card = document.createElement('div');
-                    card.className = 'market-card fade-in';
-
-                    const changeClass = pair.change >= 0 ? 'positive' : 'negative';
-                    const changeSign = pair.change >= 0 ? '+' : '';
-
-                    card.innerHTML = `
-                        <div class="market-card-header">
-                            <div class="market-symbol">
-                                <i class="${pair.icon}"></i> ${pair.symbol}
-                                <div style="font-size: 0.8rem; color: #aaaaaa; margin-top: 5px;">${pair.name}</div>
-                            </div>
-                            <div class="market-change ${changeClass}">
-                                ${changeSign}${pair.change.toFixed(2)}%
-                            </div>
-                        </div>
-                        <div class="market-price">
-                            $${pair.symbol.includes('BTC') || pair.symbol.includes('ETH') || pair.symbol.includes('XAU') ||
-                               pair.symbol.includes('US30') || pair.symbol.includes('NAS100') ?
-                               pair.price.toFixed(2) : pair.price.toFixed(4)}
-                        </div>
-                        <div class="market-info">
-                            <div class="info-item">
-                                <div class="info-label">High</div>
-                                <div class="info-value">$${pair.symbol.includes('BTC') || pair.symbol.includes('ETH') ||
-                                    pair.symbol.includes('XAU') || pair.symbol.includes('US30') || pair.symbol.includes('NAS100') ?
-                                    pair.high.toFixed(2) : pair.high.toFixed(4)}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label">Low</div>
-                                <div class="info-value">$${pair.symbol.includes('BTC') || pair.symbol.includes('ETH') ||
-                                    pair.symbol.includes('XAU') || pair.symbol.includes('US30') || pair.symbol.includes('NAS100') ?
-                                    pair.low.toFixed(2) : pair.low.toFixed(4)}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label">Volume</div>
-                                <div class="info-value">${pair.volume.toFixed(1)}M</div>
-                            </div>
-                        </div>
-                    `;
-
-                    marketGrid.appendChild(card);
-
-                    // Update statistics
-                    totalVolume += pair.volume;
-                    marketChangeSum += pair.change;
-                    if (Math.abs(pair.change) > 0) activeMarkets++;
+                    if (elementTop < window.innerHeight - elementVisible) {
+                        element.classList.add('active');
+                    }
                 });
+            };
 
-                // Update statistics display
-                document.getElementById('totalPairs').textContent = justMarketsPairs.length;
-                document.getElementById('activeMarkets').textContent = activeMarkets;
-                document.getElementById('totalVolume').textContent = `$${totalVolume.toFixed(1)}M`;
-                document.getElementById('marketChange').textContent =
-                    `${marketChangeSum >= 0 ? '+' : ''}${(marketChangeSum / justMarketsPairs.length).toFixed(2)}%`;
+            // Initial check
+            fadeInOnScroll();
 
-                // Update hero ticker with most active pair
-                const mostActive = justMarketsPairs.reduce((max, pair) =>
-                    Math.abs(pair.change) > Math.abs(max.change) ? pair : max
-                );
-                const heroChange = document.getElementById('hero-ticker-change');
-                heroChange.textContent = `${mostActive.change >= 0 ? '+' : ''}${mostActive.change.toFixed(2)}%`;
-                heroChange.style.color = mostActive.change >= 0 ? 'var(--profit-green)' : 'var(--loss-red)';
-
-                // Update last updated time
-                const now = new Date();
-                updateTime.textContent = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-
-                // Remove loading state
-                refreshBtn.classList.remove('loading');
-                refreshBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Refresh';
-
-                // Add animation to new cards
-                const fadeElements = document.querySelectorAll('.fade-in');
-                fadeElements.forEach(el => {
-                    el.style.opacity = 0;
-                    el.style.transform = 'translateY(20px)';
-                    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-
-                    setTimeout(() => {
-                        el.style.opacity = 1;
-                        el.style.transform = 'translateY(0)';
-                    }, 100);
-                });
-
-            }, 1000); // Simulated API delay
-        }
-
-        // Function to simulate WebSocket connection for real-time updates
-        function startRealTimeUpdates() {
-            // Simulate WebSocket updates every 10 seconds
-            setInterval(() => {
-                justMarketsPairs.forEach(pair => {
-                    // Simulate micro price movements
-                    const microChange = (Math.random() - 0.5) * 0.05;
-                    pair.price = pair.price * (1 + microChange / 100);
-
-                    // Update change percentage
-                    pair.change += microChange;
-
-                    // Find and update the card for this pair
-                    const symbolElements = document.querySelectorAll('.market-symbol');
-                    symbolElements.forEach(element => {
-                        if (element.textContent.includes(pair.symbol)) {
-                            const card = element.closest('.market-card');
-                            if (card) {
-                                const priceElement = card.querySelector('.market-price');
-                                const changeElement = card.querySelector('.market-change');
-                                const changeClass = pair.change >= 0 ? 'positive' : 'negative';
-                                const changeSign = pair.change >= 0 ? '+' : '';
-
-                                if (priceElement) {
-                                    priceElement.textContent = `$${
-                                        pair.symbol.includes('BTC') || pair.symbol.includes('ETH') ||
-                                        pair.symbol.includes('XAU') || pair.symbol.includes('US30') ||
-                                        pair.symbol.includes('NAS100') ?
-                                        pair.price.toFixed(2) : pair.price.toFixed(4)
-                                    }`;
-                                }
-
-                                if (changeElement) {
-                                    changeElement.textContent = `${changeSign}${pair.change.toFixed(2)}%`;
-                                    changeElement.className = `market-change ${changeClass}`;
-                                }
-                            }
-                        }
-                    });
-                });
-            }, 10000); // Update every 10 seconds
-        }
-
-        // Initialize market data
-        document.addEventListener('DOMContentLoaded', () => {
-            // Initial market data load
-            updateMarketData();
-
-            // Start real-time updates
-            startRealTimeUpdates();
-
-            // Auto-refresh every 60 seconds
-            setInterval(updateMarketData, 60000);
+            // Check on scroll
+            window.addEventListener('scroll', fadeInOnScroll);
         });
-
-        // Refresh button event listener
-        document.getElementById('refreshMarketData').addEventListener('click', updateMarketData);
-
-        // ===== EXISTING FUNCTIONALITY =====
-
-        // Menu navigation functionality
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    const headerHeight = document.querySelector('.main-header').offsetHeight;
-                    const totalOffset = headerHeight;
-
-                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - totalOffset;
-
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-
-                    // Update active link
-                    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-                    this.classList.add('active');
-                }
-            });
-        });
-
-        // Countdown timer for limited time box
-        function updateLimitedTimeCountdown() {
-            const countdownDate = new Date('December 28, 2025 23:59:59').getTime();
-            const now = new Date().getTime();
-            const distance = countdownDate - now;
-
-            if (distance < 0) {
-                document.getElementById('countdown-days').textContent = '00';
-                document.getElementById('countdown-hours').textContent = '00';
-                document.getElementById('countdown-minutes').textContent = '00';
-                document.querySelector('.limited-time-offer').textContent = 'OFFER EXPIRED!';
-                return;
-            }
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-
-            document.getElementById('countdown-days').textContent = days.toString().padStart(2, '0');
-            document.getElementById('countdown-hours').textContent = hours.toString().padStart(2, '0');
-            document.getElementById('countdown-minutes').textContent = minutes.toString().padStart(2, '0');
-
-            if (days === 0 && hours < 24) {
-                const box = document.querySelector('.limited-time-box');
-                box.style.animation = 'pulse 0.5s infinite';
-                box.style.background = 'linear-gradient(135deg, #ff0000, #ff6600)';
-            }
-        }
-
-        // Initialize countdown
-        updateLimitedTimeCountdown();
-        setInterval(updateLimitedTimeCountdown, 60000);
-
-        // Simple fade-in animation on scroll
-        const fadeElements = document.querySelectorAll('.fade-in');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = 1;
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, { threshold: 0.1 });
-
-        fadeElements.forEach(el => {
-            el.style.opacity = 0;
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(el);
-        });
-
-        // Add performance icon styles
-        const style = document.createElement('style');
-        style.textContent = `
-            .performance-icon, .feature-icon {
-                font-size: 2rem;
-                margin-bottom: 10px;
-                color: var(--primary-green);
-            }
-            .market-feature .feature-icon {
-                color: var(--primary-blue);
-            }
-            .section-title h2 i, .pricing-title i, .step-title i, .cta-title i {
-                margin-right: 10px;
-            }
-            .pair-name i {
-                margin-right: 8px;
-            }
-            .benefit-icon i {
-                font-size: 1.5rem;
-            }
-        `;
-        document.head.appendChild(style);
     </script>
 </body>
 </html>
