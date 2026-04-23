@@ -395,6 +395,58 @@
         <a href="https://paystack.shop/pay/innocenttraders" class="cta-button" target="_blank">
             <i class="fas fa-shopping-cart"></i> Purchase NAVI v3 Now
         </a>
+
+        <style>
+            .capitec-btn { display:inline-block; margin-top:15px; background:transparent; color:#fff; padding:18px 40px; font-size:18px; font-weight:600; border-radius:10px; border:2px solid rgba(255,255,255,0.25); cursor:pointer; transition:all 0.3s ease; }
+            .capitec-btn:hover { border-color:rgba(255,0,0,0.6); color:#ff4444; transform:translateY(-5px); }
+            .capitec-drawer { display:none; max-width:480px; margin:20px auto 0; background:rgba(30,30,30,0.9); border-radius:14px; padding:28px 30px; border:1px solid rgba(255,0,0,0.25); text-align:left; }
+            .capitec-drawer.open { display:block; animation:fadeIn 0.3s ease; }
+            .pay-row { display:flex; justify-content:space-between; align-items:center; padding:11px 0; border-bottom:1px solid rgba(255,255,255,0.07); }
+            .pay-row:last-child { border-bottom:none; }
+            .pay-label { color:#999; font-size:0.78rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:2px; }
+            .pay-value { font-weight:700; font-size:1rem; color:#fff; }
+            .copy-btn { background:rgba(255,0,0,0.1); border:1px solid rgba(255,0,0,0.3); color:#ff4444; padding:5px 13px; border-radius:6px; cursor:pointer; font-size:0.78rem; transition:all 0.2s; white-space:nowrap; margin-left:10px; }
+            .copy-btn:hover { background:rgba(255,0,0,0.22); }
+            .copy-btn.copied { background:rgba(0,200,80,0.12); border-color:rgba(0,200,80,0.4); color:#00c850; }
+        </style>
+
+        <br>
+        <button class="capitec-btn" onclick="document.getElementById('capitec-drawer').classList.toggle('open')">
+            💳 OR PAY VIA CAPITEC
+        </button>
+
+        <div class="capitec-drawer" id="capitec-drawer">
+            <div class="pay-row">
+                <div><div class="pay-label">Bank</div><div class="pay-value">Capitec Bank</div></div>
+            </div>
+            <div class="pay-row">
+                <div><div class="pay-label">Account Holder</div><div class="pay-value" id="val-holder">MR MAJOLA</div></div>
+                <button class="copy-btn" onclick="copyVal('val-holder',this)"><i class="fas fa-copy"></i> Copy</button>
+            </div>
+            <div class="pay-row">
+                <div><div class="pay-label">Account Number</div><div class="pay-value" id="val-accnum">1900362471</div></div>
+                <button class="copy-btn" onclick="copyVal('val-accnum',this)"><i class="fas fa-copy"></i> Copy</button>
+            </div>
+            <div class="pay-row">
+                <div><div class="pay-label">Branch Code</div><div class="pay-value" id="val-branch">470010</div></div>
+                <button class="copy-btn" onclick="copyVal('val-branch',this)"><i class="fas fa-copy"></i> Copy</button>
+            </div>
+            <p style="text-align:center; color:#777; font-size:0.8rem; margin-top:16px;">After payment, send proof via <a href="https://wa.me/27813884972" style="color:#ff4444;">WhatsApp</a> to receive your license.</p>
+        </div>
+
+        <script>
+            function copyVal(id, btn) {
+                const text = document.getElementById(id).textContent;
+                navigator.clipboard.writeText(text).then(() => {
+                    btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                    btn.classList.add('copied');
+                    setTimeout(() => {
+                        btn.innerHTML = '<i class="fas fa-copy"></i> Copy';
+                        btn.classList.remove('copied');
+                    }, 2000);
+                });
+            }
+        </script>
     </section>
 
     <!-- Stats Section -->
