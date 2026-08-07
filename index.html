@@ -417,33 +417,37 @@ footer{padding:44px 0 28px;border-top:1px solid rgba(229,57,53,.12);background:#
   <div class="ctr">
     <div class="sh fade">
       <h2 class="stitle">Choose your <em>version</em></h2>
-      <p class="ssub">South Africa pays in Rands &nbsp;·&nbsp; International pays in USD</p>
+      <p class="ssub">🔥 Special pricing active &nbsp;·&nbsp; South Africa pays in Rands</p>
     </div>
     <div class="pstack fade">
       <div class="pc">
         <div class="pico"><i class="fas fa-mobile-alt"></i></div>
         <div class="pname">Android</div>
-        <div class="pprice">R5,500</div>
+        <div><span class="porig">R667</span><span class="ppill">SPECIAL</span></div>
+        <div class="pprice">R400</div>
         <button class="pbtn" onclick="openModal('Android')"><i class="fas fa-shopping-cart"></i> BUY ANDROID</button>
       </div>
       <div class="pc pop">
         <div class="poptag">POPULAR</div>
         <div class="pico"><i class="fab fa-apple"></i></div>
         <div class="pname">iOS</div>
-        <div class="pprice">R6,500</div>
+        <div><span class="porig">R1,000</span><span class="ppill">SPECIAL</span></div>
+        <div class="pprice">R600</div>
         <button class="pbtn" onclick="openModal('iOS')"><i class="fas fa-shopping-cart"></i> BUY iOS</button>
       </div>
       <div class="pc">
         <div class="pico"><i class="fas fa-desktop"></i></div>
-        <div class="pname">PC Bot</div>
-        <div class="pprice">R7,700</div>
-        <button class="pbtn" onclick="openModal('PC Bot')"><i class="fas fa-shopping-cart"></i> BUY PC BOT</button>
+        <div class="pname">PC</div>
+        <div><span class="porig">R2,833</span><span class="ppill">SPECIAL</span></div>
+        <div class="pprice">R1,700</div>
+        <button class="pbtn" onclick="openModal('PC')"><i class="fas fa-shopping-cart"></i> BUY PC</button>
       </div>
       <div class="pc" style="border-color:rgba(255,180,0,0.35);background:linear-gradient(150deg,rgba(80,50,0,0.5) 0%,rgba(30,20,0,0.85) 60%,rgba(16,12,0,0.92) 100%);">
         <div style="position:absolute;top:16px;right:18px;font-size:.6rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,180,0,0.7);">NEWS TRADING</div>
         <div class="pico"><i class="fas fa-newspaper" style="color:rgba(255,200,50,0.9);"></i></div>
         <div class="pname" style="color:rgba(255,200,50,0.9);">PC — News Trading</div>
-        <div class="pprice" style="color:rgba(255,190,40,0.95);text-shadow:0 0 30px rgba(255,180,0,0.4);">R9,500</div>
+        <div><span class="porig">R3,500</span><span class="ppill" style="background:rgba(200,140,0,0.9);">SPECIAL</span></div>
+        <div class="pprice" style="color:rgba(255,190,40,0.95);text-shadow:0 0 30px rgba(255,180,0,0.4);">R2,100</div>
         <button class="pbtn" style="border-color:rgba(255,180,0,0.25);" onclick="openModal('PC News Trading')"><i class="fas fa-shopping-cart"></i> BUY NEWS PC</button>
       </div>
     </div>
@@ -840,7 +844,7 @@ function bgClosePrem(e){if(e.target===document.getElementById('premModalBg'))clo
 
 /* modal */
 let curVersion='Android';
-const prices={'Android':'R5,500','iOS':'R6,500','PC Bot':'R7,700','PC News Trading':'R9,500'};
+const prices={'Android':'R400','iOS':'R600','PC':'R1,700','PC News Trading':'R2,100'};
 function openModal(v){
   curVersion=v||curVersion;
   document.getElementById('selVal').innerHTML=curVersion+' selected — <em>'+curVersion+' Version</em>';
